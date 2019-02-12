@@ -2,7 +2,9 @@
 
 #include <memory>
 #include <string>
-#include <vector>
+#include <variant>
+
+typedef std::variant<int, float, long, std::string> EventVariant;
 
 
 class EventNode;
@@ -12,38 +14,43 @@ class Event {
 public:
 	Event(
 		std::string id,
-		std::shared_ptr<EventNode> source=nullptr,
-		std::shared_ptr<EventNode> sink=nullptr
+		std::string source,
+		std::string sink
 	);
 	Event(const Event& event);
 	virtual ~Event() {}
 
+	std::string get_id() const { return m_id; }
+	std::string get_source() const { return m_source; }
+	std::string get_sink() const { return m_sink; }
+
 protected:
 	std::string m_id;
-	std::shared_ptr<EventNode> source;
-	std::shared_ptr<EventNode> sink;
+	std::string m_source;
+	std::string m_sink;
 };
 
 
 
-class EventNode {
+class EventNode: public std::enable_shared_from_this<EventNode> {
 public:
 	EventNode(std::string address);
-	EventNode(const EventNode& node);
-	virtual ~EventNode() {}
+	EventNode(const EventNode& node) = delete;
+	virtual ~EventNode();
+
+	std::string get_address() const {
+		return m_address;
+	}
+
+	void send_event(std::string id, std::string sink="");
 
 protected:
 	std::string m_address;
 };
 
 
-
-class EventManager {
-public:
-	EventManager();
-	EventManager(const EventManager& manager) = delete;
-	virtual ~EventManager() {}
-
-private:
-	std::vector<std::shared_ptr<EventNode>> m_nodes;
-};
+void enqueue_event(Event event);
+void enqueue_event(std::string id, std::string sink="");
+void register_node(std::shared_ptr<EventNode> node);
+void unregister_node(std::shared_ptr<EventNode> node);
+void dispatch_events();

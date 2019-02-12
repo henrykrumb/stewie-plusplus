@@ -15,7 +15,7 @@
 class Widget: public EventNode {
 public:
 	Widget(Box box, std::string address="");
-	Widget(const Widget& widget);
+	Widget(const Widget& widget) = delete;
 	virtual ~Widget() {}
 
 	int handle_key(int c) { return i_handle_key(c); }

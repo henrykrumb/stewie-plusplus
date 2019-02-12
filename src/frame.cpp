@@ -10,12 +10,6 @@ Frame::Frame(Box box, std::string address):
 }
 
 
-Frame::Frame(const Frame& frame):
-		Container(frame)
-{
-}
-
-
 int Frame::i_handle_key(int c) {
 	return c;
 }

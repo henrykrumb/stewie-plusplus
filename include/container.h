@@ -9,7 +9,7 @@
 class Container: public Widget {
 public:
 	Container(Box box, std::string address="");
-	Container(const Container& c);
+	Container(const Container& c) = delete;
 	virtual ~Container() {}
 	
 	virtual void i_show(Canvas& canvas) {}

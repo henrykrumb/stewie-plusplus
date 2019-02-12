@@ -7,12 +7,6 @@ Container::Container(Box box, std::string address):
 }
 
 
-Container::Container(const Container& c):
-		Widget(c)
-{
-}
-
-
 bool Container::add_child(std::shared_ptr<Widget> widget) {
 	
 }

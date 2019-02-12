@@ -12,11 +12,3 @@ Widget::Widget(Box box, std::string address):
 		m_box(box) {
 	s_instances++;
 }
-
-
-Widget::Widget(const Widget& widget):
-		EventNode(widget),
-		m_box(widget.m_box)
-{
-	
-}

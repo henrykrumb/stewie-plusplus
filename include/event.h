@@ -12,11 +12,7 @@ class EventNode;
 
 class Event {
 public:
-	Event(
-		std::string id,
-		std::string source,
-		std::string sink
-	);
+	Event(std::string id, std::string source, std::string sink="");
 	Event(const Event& event);
 	virtual ~Event() {}
 
@@ -32,7 +28,7 @@ protected:
 
 
 
-class EventNode: public std::enable_shared_from_this<EventNode> {
+class EventNode {
 public:
 	EventNode(std::string address);
 	EventNode(const EventNode& node) = delete;
@@ -51,6 +47,4 @@ protected:
 
 void enqueue_event(Event event);
 void enqueue_event(std::string id, std::string sink="");
-void register_node(std::shared_ptr<EventNode> node);
-void unregister_node(std::shared_ptr<EventNode> node);
 void dispatch_events();

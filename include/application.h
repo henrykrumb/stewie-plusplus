@@ -12,8 +12,5 @@ public:
 	void run();
 
 private:
-	void p_exit();
-	void p_exit_signal_handler();
-	
 	Frame m_frame;
 };

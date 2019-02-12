@@ -4,54 +4,19 @@
 #include "../include/event.h"
 
 
-Event::Event(std::string id,
-	std::string source,
-	std::string sink):
-		m_id(id),
-		m_source(source),
-		m_sink(sink)
-{
-}
-
-
-Event::Event(const Event& event):
-		m_id(event.m_id),
-		m_source(event.m_source),
-		m_sink(event.m_sink)
-{
-}
-
-
-EventNode::EventNode(std::string address):
-		m_address(address)
-{
-	register_node(shared_from_this());
-}
-
-
-EventNode::~EventNode() {
-	unregister_node(shared_from_this());
-}
-
-
-void EventNode::send_event(std::string id, std::string sink) {
-	enqueue_event(Event(id, m_address, sink));
-}
-
-
 static std::queue<Event> event_queue;
-static std::map<std::string, std::shared_ptr<EventNode>> event_nodes;
+static std::map<std::string, EventNode*> event_nodes;
 
 
-void register_node(std::shared_ptr<EventNode> node) {
+static void register_node(EventNode* node) {
 	event_nodes.insert(
-		std::pair<std::string, std::shared_ptr<EventNode>>(
+		std::pair<std::string, EventNode*>(
 			node->get_address(), node
 	));
 }
 
 
-void unregister_node(std::shared_ptr<EventNode> node) {
+static void unregister_node(EventNode* node) {
 	event_nodes.erase(node->get_address());
 }
 
@@ -74,11 +39,49 @@ void dispatch_events() {
 		std::string sink = event.get_sink();
 		
 		if (sink.empty()) {
-			
+			for (auto it = event_nodes.begin(); it != event_nodes.end(); ++it) {
+				// TODO tell node about event
+			}
 		}
 		else {
-			std::shared_ptr<EventNode> node = event_nodes.at(sink);
-			
+			EventNode* node = event_nodes.at(sink);
+			// TODO tell node about event
 		}
 	}
+}
+
+
+
+Event::Event(std::string id,
+	std::string source,
+	std::string sink):
+		m_id(id),
+		m_source(source),
+		m_sink(sink)
+{
+}
+
+
+Event::Event(const Event& event):
+		m_id(event.m_id),
+		m_source(event.m_source),
+		m_sink(event.m_sink)
+{
+}
+
+
+EventNode::EventNode(std::string address):
+		m_address(address)
+{
+	register_node(this);
+}
+
+
+EventNode::~EventNode() {
+	unregister_node(this);
+}
+
+
+void EventNode::send_event(std::string id, std::string sink) {
+	enqueue_event(Event(id, m_address, sink));
 }

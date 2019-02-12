@@ -1,0 +1,4 @@
+list(APPEND EXAMPLE_SOURCES
+	${CMAKE_CURRENT_LIST_DIR}/example_1.cpp
+	${CMAKE_CURRENT_LIST_DIR}/main.cpp
+)

@@ -37,6 +37,8 @@ public:
 	bool is_focused() const { return m_focused; }
 	bool is_visible() const { return m_visible; }
 
+	Box get_box() const { return m_box; }
+
 	void set_box(Box box);
 	void set_parent(Widget* parent);
 

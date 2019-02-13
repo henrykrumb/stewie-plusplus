@@ -12,7 +12,7 @@ public:
 	Container(const Container&) = delete;
 	virtual ~Container();
 	
-	virtual void show(Canvas& canvas) {}
+	virtual void show(Canvas& canvas);
 
 	bool _add_child(std::shared_ptr<Widget> widget);
 	virtual bool add_child(std::shared_ptr<Widget> widget) {

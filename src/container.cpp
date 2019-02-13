@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "container.h"
 
 
@@ -15,22 +17,46 @@ Container::~Container() {
 }
 
 
+void Container::show(Canvas& canvas) {
+	
+}
+
+
 bool Container::_add_child(std::shared_ptr<Widget> widget) {
-	if (m_focused_child == nullptr && widget->is_focusable()) {
-		m_focused_child = widget;
-	}
 	if (add_child(widget)) {
+		if (m_focused_child == nullptr && widget->is_focusable()) {
+			m_focused_child = widget;
+		}
 		widget->set_parent(this);
 		m_children.push_back(widget);
 		_pack();
+		
+		return true;
 	}
+	
+	return false;
 }
 
 
 bool Container::_remove_child(std::shared_ptr<Widget> widget) {
-	if (widget == m_focused_child) {
-		m_focused_child = nullptr;
+	if (remove_child(widget)) {
+		if (widget == m_focused_child) {
+			m_focused_child = nullptr;
+		}
+		
+		auto iter = std::find(m_children.begin(), m_children.end(), widget);
+		if (iter == m_children.end()) {
+			return false;
+		}
+		
+		widget->set_parent(nullptr);
+		m_children.erase(iter);
+		_pack();
+		
+		return true;
 	}
+	
+	return false;
 }
 
 
@@ -41,10 +67,10 @@ std::shared_ptr<Widget> Container::get_child(std::string address, bool recursive
 		}
 		if (recursive) {
 			std::shared_ptr<Widget> child = (*it)->get_child(address, recursive);
-				if (child != nullptr) {
-					return child;
-				}
+			if (child != nullptr) {
+				return child;
 			}
+		}
 	}
 	return nullptr;
 }

@@ -13,6 +13,7 @@ public:
 	Frame(const Frame&) = delete;
 	virtual ~Frame() {}
 
+	virtual bool add_child(std::shared_ptr<Widget> widget);
 	virtual void pack();
 	virtual int handle_key(int c);
 

@@ -1,8 +1,8 @@
 #include <curses.h>
 
-#include "../include/application.h"
-#include "../include/event.h"
-#include "../include/geometry.h"
+#include "application.h"
+#include "event.h"
+#include "geometry.h"
 
 
 static void s_exit() {
@@ -14,13 +14,13 @@ static void s_exit() {
 }
 
 
-Application::Application():
-		m_frame(Box(0, 0, 0, 0)) {
+Application::Application() {
 }
 
 
 void Application::run() {
 	initscr();
+	m_frame.set_box(Box(0, 0, COLS, LINES));
 	m_frame.pack();
 	noecho();
 	cbreak();

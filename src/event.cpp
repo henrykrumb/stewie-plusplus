@@ -1,7 +1,7 @@
 #include <map>
 #include <queue>
 
-#include "../include/event.h"
+#include "event.h"
 
 
 static std::queue<Event> event_queue;

@@ -31,7 +31,7 @@ protected:
 class EventNode {
 public:
 	EventNode(std::string address);
-	EventNode(const EventNode& node) = delete;
+	EventNode(const EventNode&) = delete;
 	virtual ~EventNode();
 
 	std::string get_address() const {

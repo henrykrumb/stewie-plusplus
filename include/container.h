@@ -8,27 +8,29 @@
 
 class Container: public Widget {
 public:
-	Container(Box box, std::string address="");
-	Container(const Container& c) = delete;
-	virtual ~Container() {}
+	Container(std::string address="");
+	Container(const Container&) = delete;
+	virtual ~Container();
 	
-	virtual void i_show(Canvas& canvas) {}
+	virtual void show(Canvas& canvas) {}
 
-	bool add_child(std::shared_ptr<Widget> widget);
-	virtual bool i_add_child(std::shared_ptr<Widget> widget) {
+	bool _add_child(std::shared_ptr<Widget> widget);
+	virtual bool add_child(std::shared_ptr<Widget> widget) {
 		return true;
 	}
 
-	bool remove_child(std::shared_ptr<Widget> widget);
-	virtual bool i_remove_child(std::shared_ptr<Widget> widget) {
+	bool _remove_child(std::shared_ptr<Widget> widget);
+	virtual bool remove_child(std::shared_ptr<Widget> widget) {
 		return true;
 	}
 
-	void get_child(std::string address, bool recursive=true);
+	virtual void _pack();
+
+	virtual std::shared_ptr<Widget> get_child(std::string address, bool recursive=true);
 
 	std::size_t children();
 
 protected:
-	int m_focused_child;
+	std::shared_ptr<Widget> m_focused_child;
 	std::vector<std::shared_ptr<Widget>> m_children;
 };

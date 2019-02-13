@@ -1,15 +1,20 @@
 #include <iostream>
 
-#include "../include/frame.h"
+#include "frame.h"
 
 
-Frame::Frame(Box box, std::string address):
-		Container(box, address)
+Frame::Frame(std::string address):
+		Container(address)
 {
 	MAKE_ADDRESS(Frame);
 }
 
 
-int Frame::i_handle_key(int c) {
+void Frame::pack() {
+	
+}
+
+
+int Frame::handle_key(int c) {
 	return c;
 }

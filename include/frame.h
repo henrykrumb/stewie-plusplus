@@ -9,11 +9,12 @@
 
 class Frame: public Container {
 public:
-	Frame(Box box, std::string address="");
-	Frame(const Frame& frame) = delete;
+	Frame(std::string address="");
+	Frame(const Frame&) = delete;
 	virtual ~Frame() {}
 
-	virtual int i_handle_key(int c);
+	virtual void pack();
+	virtual int handle_key(int c);
 
 protected:
 };

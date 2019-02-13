@@ -7,7 +7,7 @@ add_compile_options(-std=c++17)
 
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
-
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
 include(src/CMakeLists.txt)
 

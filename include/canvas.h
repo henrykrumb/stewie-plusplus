@@ -8,7 +8,7 @@
 class Canvas {
 public:
 	Canvas(bool use_unicode=false);
-	Canvas(const Canvas& c) = delete;
+	Canvas(const Canvas&) = delete;
 	virtual ~Canvas() {}
 	
 	void draw_char(char c, int x, int y);

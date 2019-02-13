@@ -1,6 +1,6 @@
 #include <curses.h>
 
-#include "../include/canvas.h"
+#include "canvas.h"
 
 
 Canvas::Canvas(bool use_unicode):

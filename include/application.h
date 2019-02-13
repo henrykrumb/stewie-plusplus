@@ -6,7 +6,7 @@
 class Application {
 public:
 	Application();
-	Application(const Application& a) = delete;
+	Application(const Application&) = delete;
 	virtual ~Application() {}
 
 	void run();

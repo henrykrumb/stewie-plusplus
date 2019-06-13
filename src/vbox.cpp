@@ -1,0 +1,45 @@
+#include <curses.h>
+#include <iostream>
+
+#include "vbox.h"
+
+
+VBox::VBox(std::string address):
+		Container(address)
+{
+	MAKE_ADDRESS(VBox);
+}
+
+
+VBox::~VBox() {
+	
+}
+
+
+void VBox::_pack() {
+	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
+	if (m_children.empty())
+		return;
+	int childheight = h / m_children.size();
+	int i = 0;
+	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
+		Box box(x, y + i * childheight, w, childheight);
+		(*it)->set_box(box);
+		i++;
+	}
+	focus_first();
+}
+
+
+int VBox::_handle_key(const int& key) {
+	switch (key) {
+		case KEY_UP:
+			focus_previous();
+			break;
+		case KEY_DOWN:
+			focus_next();
+			break;
+		default: return key;
+	}
+	return 0;
+}

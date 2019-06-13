@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 
 #include "container.h"
 
@@ -18,18 +19,39 @@ Container::~Container() {
 
 
 void Container::show(Canvas& canvas) {
-	
+	if (m_visible) {
+		_show(canvas);
+		for (auto it = m_children.begin(); it != m_children.end(); ++it) {
+			(*it)->show(canvas);
+		}
+	}
 }
 
 
-bool Container::_add_child(std::shared_ptr<Widget> widget) {
-	if (add_child(widget)) {
+/**
+ * Usually, there is no need to display container widgets as they are used
+ * to group visible widgets without being visible themselves.
+ */
+void Container::_show(Canvas& canvas) {}
+
+
+int Container::handle_key(const int& c) {
+	int key = c;
+	if (m_focused_child != nullptr) {
+		key = m_focused_child->handle_key(c);
+	}
+	return _handle_key(key);
+}
+
+
+bool Container::add_child(std::shared_ptr<Widget> widget) {
+	if (_add_child(widget)) {
 		if (m_focused_child == nullptr && widget->is_focusable()) {
 			m_focused_child = widget;
 		}
 		widget->set_parent(this);
 		m_children.push_back(widget);
-		_pack();
+		pack();
 		
 		return true;
 	}
@@ -38,8 +60,8 @@ bool Container::_add_child(std::shared_ptr<Widget> widget) {
 }
 
 
-bool Container::_remove_child(std::shared_ptr<Widget> widget) {
-	if (remove_child(widget)) {
+bool Container::remove_child(std::shared_ptr<Widget> widget) {
+	if (_remove_child(widget)) {
 		if (widget == m_focused_child) {
 			m_focused_child = nullptr;
 		}
@@ -51,7 +73,7 @@ bool Container::_remove_child(std::shared_ptr<Widget> widget) {
 		
 		widget->set_parent(nullptr);
 		m_children.erase(iter);
-		_pack();
+		pack();
 		
 		return true;
 	}
@@ -72,14 +94,16 @@ std::shared_ptr<Widget> Container::get_child(std::string address, bool recursive
 			}
 		}
 	}
+	
 	return nullptr;
 }
 
 
-void Container::_pack() {
-	pack();
+void Container::pack() {
+	_pack();
 	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
 		(*it)->set_focus(*it == m_focused_child && m_focused);
+		(*it)->pack();
 	}
 }
 
@@ -87,3 +111,59 @@ void Container::_pack() {
 std::size_t Container::children() {
 	return m_children.size();
 }
+
+
+bool Container::focus_first() {
+	if (m_children.empty())
+		return false;
+	if (m_focused_child != nullptr) {
+		m_focused_child->set_focus(false);
+	}
+	m_focused_child = *m_children.begin();
+	m_focused_child->set_focus(true);
+	return true;
+}
+
+
+bool Container::focus_next() {
+	if (m_children.empty()) {
+		return false;
+	}
+	auto focus_iter = std::find(
+		m_children.begin(),
+		m_children.end(),
+		m_focused_child
+	);
+	if (focus_iter == m_children.end()) {
+		return false;
+	}
+	focus_iter++;
+	if (focus_iter == m_children.end()) {
+		return false;
+	}
+	m_focused_child->set_focus(false);
+	m_focused_child = *focus_iter;
+	m_focused_child->set_focus(true);
+	return true;
+}
+
+
+bool Container::focus_previous() {
+	if (m_children.empty()) {
+		return false;
+	}
+	auto focus_iter = std::find(
+		m_children.begin(),
+		m_children.end(),
+		m_focused_child
+	);
+	if (focus_iter == m_children.begin() || focus_iter == m_children.end()) {
+		return false;
+	}
+	focus_iter--;
+	m_focused_child->set_focus(false);
+	m_focused_child = *focus_iter;
+	m_focused_child->set_focus(true);
+	return true;
+}
+

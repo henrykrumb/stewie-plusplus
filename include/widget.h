@@ -18,24 +18,26 @@ public:
 	Widget(const Widget& widget) = delete;
 	virtual ~Widget() {}
 
-	int _handle_key(int c) { return handle_key(c); }
-	void _show(Canvas& canvas) { show(canvas); }
-	void _pack() { pack(); }
+	virtual int handle_key(int c) { return _handle_key(c); }
+	virtual void show(Canvas& canvas);
+	virtual void pack() { _pack(); }
 	
-	virtual int handle_key(int c) = 0;
-	virtual void show(Canvas& canvas) = 0;
-	virtual void pack() {};
+	virtual int _handle_key(const int& c) = 0;
+	virtual void _show(Canvas& canvas) = 0;
+	virtual void _pack() {};
 	
 	virtual std::shared_ptr<Widget> get_child(
 		std::string address, bool recursive=true) { return nullptr; }
 	
-	void set_focus(bool focus) {
+	void set_focus(const bool& focus) {
 		m_focused = focus;
 	}
 	
 	bool is_focusable() const { return m_focusable; }
 	bool is_focused() const { return m_focused; }
+	
 	bool is_visible() const { return m_visible; }
+	void set_visible(bool visible) { m_visible = visible; }
 
 	Box get_box() const { return m_box; }
 

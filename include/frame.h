@@ -13,9 +13,9 @@ public:
 	Frame(const Frame&) = delete;
 	virtual ~Frame() {}
 
-	virtual bool add_child(std::shared_ptr<Widget> widget);
-	virtual void pack();
-	virtual int handle_key(int c);
+	virtual bool _add_child(std::shared_ptr<Widget> widget);
+	virtual void _pack();
+	virtual int _handle_key(const int& c);
 
 protected:
 };

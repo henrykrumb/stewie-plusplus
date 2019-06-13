@@ -10,7 +10,7 @@ Frame::Frame(std::string address):
 }
 
 
-bool Frame::add_child(std::shared_ptr<Widget> widget) {
+bool Frame::_add_child(std::shared_ptr<Widget> widget) {
 	if (m_children.size() > 1) {
 		throw std::runtime_error("Frames can only have one child");
 	}
@@ -18,13 +18,14 @@ bool Frame::add_child(std::shared_ptr<Widget> widget) {
 }
 
 
-void Frame::pack() {
+void Frame::_pack() {
 	if (!m_children.empty()) {
 		m_children[0]->set_box(m_box);
+		focus_first();
 	}
 }
 
 
-int Frame::handle_key(int c) {
+int Frame::_handle_key(const int& c) {
 	return c;
 }

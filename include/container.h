@@ -13,22 +13,29 @@ public:
 	virtual ~Container();
 	
 	virtual void show(Canvas& canvas);
+	virtual void _show(Canvas& canvas);
+	
+	virtual int handle_key(const int& c);
 
-	bool _add_child(std::shared_ptr<Widget> widget);
-	virtual bool add_child(std::shared_ptr<Widget> widget) {
+	bool add_child(std::shared_ptr<Widget> widget);
+	virtual bool _add_child(std::shared_ptr<Widget> widget) {
 		return true;
 	}
 
-	bool _remove_child(std::shared_ptr<Widget> widget);
-	virtual bool remove_child(std::shared_ptr<Widget> widget) {
+	bool remove_child(std::shared_ptr<Widget> widget);
+	virtual bool _remove_child(std::shared_ptr<Widget> widget) {
 		return true;
 	}
 
-	virtual void _pack();
+	virtual void pack();
 
 	virtual std::shared_ptr<Widget> get_child(std::string address, bool recursive=true);
 
 	std::size_t children();
+
+	bool focus_first();
+	bool focus_next();
+	bool focus_previous();
 
 protected:
 	std::shared_ptr<Widget> m_focused_child;

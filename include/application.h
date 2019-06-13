@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+
 #include "frame.h"
 
 
@@ -8,9 +11,10 @@ public:
 	Application();
 	Application(const Application&) = delete;
 	virtual ~Application() {}
-
+	
+	void add_frame(std::shared_ptr<Frame> frame);
 	void run();
 
 private:
-	Frame m_frame;
+	std::vector<std::shared_ptr<Frame>> m_frames;
 };

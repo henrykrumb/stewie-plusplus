@@ -40,12 +40,12 @@ void dispatch_events() {
 		
 		if (sink.empty()) {
 			for (auto it = event_nodes.begin(); it != event_nodes.end(); ++it) {
-				// TODO tell node about event
+				it->second->handle_event(event);
 			}
 		}
 		else {
 			EventNode* node = event_nodes.at(sink);
-			// TODO tell node about event
+			node->handle_event(event);
 		}
 	}
 }
@@ -85,3 +85,4 @@ EventNode::~EventNode() {
 void EventNode::send_event(std::string id, std::string sink) {
 	enqueue_event(Event(id, m_address, sink));
 }
+

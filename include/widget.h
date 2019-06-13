@@ -17,7 +17,7 @@ public:
 	Widget(std::string address="");
 	Widget(const Widget& widget) = delete;
 	virtual ~Widget() {}
-
+	
 	virtual int handle_key(const int& c) { return _handle_key(c); }
 	virtual void show(Canvas& canvas);
 	virtual void pack() { _pack(); }

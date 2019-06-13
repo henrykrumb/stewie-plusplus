@@ -18,8 +18,9 @@ VBox::~VBox() {
 
 void VBox::_pack() {
 	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
-	if (m_children.empty())
+	if (m_children.empty()) {
 		return;
+	}
 	int childheight = h / m_children.size();
 	int i = 0;
 	for (auto it = m_children.begin(); it != m_children.end(); ++it) {

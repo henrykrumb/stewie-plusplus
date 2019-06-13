@@ -39,6 +39,7 @@ public:
 	}
 
 	void send_event(std::string id, std::string sink="");
+	virtual void handle_event(const Event& event) = 0;
 
 protected:
 	std::string m_address;

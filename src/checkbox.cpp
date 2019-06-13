@@ -21,9 +21,15 @@ CheckBox::CheckBox(
 }
 
 
+void CheckBox::handle_event(const Event& event) {
+	
+}
+
+
 int CheckBox::_handle_key(const int& c) {
 	if (c == ' ') {
 		m_state = !m_state;
+		send_event("activate");
 		return 0;
 	}
 	return c;
@@ -32,10 +38,7 @@ int CheckBox::_handle_key(const int& c) {
 
 void CheckBox::_show(Canvas& canvas) {
 	canvas.draw_frame(m_box);
-	int x = m_box.x();
-	int y = m_box.y();
-	int w = m_box.w();
-	int h = m_box.h();
+	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
 	std::stringstream sstr;
 	
 	if (m_focused) {
@@ -45,10 +48,12 @@ void CheckBox::_show(Canvas& canvas) {
 		sstr << "   ";
 	}
 	sstr << "[";
-	if (m_state)
+	if (m_state) {
 		sstr << "x";
-	else
+	}
+	else {
 		sstr << " ";
+	}
 	sstr << "]";
 	sstr << " " << m_label;
 	std::string text = sstr.str();

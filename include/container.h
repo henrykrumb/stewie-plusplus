@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "event.h"
 #include "geometry.h"
 #include "widget.h"
 
@@ -11,6 +12,8 @@ public:
 	Container(std::string address="");
 	Container(const Container&) = delete;
 	virtual ~Container();
+	
+	virtual void handle_event(const Event& event) {};
 	
 	virtual void show(Canvas& canvas);
 	virtual void _show(Canvas& canvas);

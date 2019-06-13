@@ -1,5 +1,5 @@
 #pragma once
-
+#include "event.h"
 #include "widget.h"
 
 
@@ -13,6 +13,8 @@ public:
 	);
 	CheckBox(const CheckBox&) = delete;
 	virtual ~CheckBox() {}
+	
+	virtual void handle_event(const Event& event);
 	
 	virtual int _handle_key(const int& c);
 	virtual void _show(Canvas& canvas);

@@ -18,7 +18,7 @@ public:
 	Widget(const Widget& widget) = delete;
 	virtual ~Widget() {}
 
-	virtual int handle_key(int c) { return _handle_key(c); }
+	virtual int handle_key(const int& c) { return _handle_key(c); }
 	virtual void show(Canvas& canvas);
 	virtual void pack() { _pack(); }
 	
@@ -27,7 +27,8 @@ public:
 	virtual void _pack() {};
 	
 	virtual std::shared_ptr<Widget> get_child(
-		std::string address, bool recursive=true) { return nullptr; }
+		std::string address,
+		bool recursive=true) { return nullptr; }
 	
 	void set_focus(const bool& focus) {
 		m_focused = focus;

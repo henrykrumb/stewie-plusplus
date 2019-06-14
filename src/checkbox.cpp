@@ -51,14 +51,8 @@ void CheckBox::_show(Canvas& canvas) {
 		sstr << "   ";
 	}
 	sstr << "[";
-	if (m_state) {
-		sstr << "x";
-	}
-	else {
-		sstr << " ";
-	}
-	sstr << "]";
-	sstr << " " << m_label;
+	sstr << (m_state ? "x" : " ");
+	sstr << "] " << m_label;
 	std::string text = sstr.str();
 	
 	Dimension d = stringsize(text);

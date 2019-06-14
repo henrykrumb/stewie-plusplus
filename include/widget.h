@@ -30,18 +30,14 @@ public:
 		std::string address,
 		bool recursive=true) { return nullptr; }
 	
-	void set_focus(const bool& focus) {
-		m_focused = focus;
-	}
-	
+	void set_focus(const bool& focus) { m_focused = focus; }
 	bool is_focusable() const { return m_focusable; }
 	bool is_focused() const { return m_focused; }
 	
 	bool is_visible() const { return m_visible; }
 	void set_visible(bool visible) { m_visible = visible; }
-
+	
 	Box get_box() const { return m_box; }
-
 	void set_box(Box box);
 	void set_parent(Widget* parent);
 

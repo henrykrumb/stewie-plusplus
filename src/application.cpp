@@ -17,15 +17,41 @@ static void s_exit() {
 }
 
 
+std::string application_status_to_string(int status) {
+	switch (status) {
+		case APP_STATUS_NO_FRAMES:
+			return "no Frame container widgets found in Application";
+		case APP_STATUS_OK:
+			return "ok";
+		case APP_STATUS_USER_QUIT:
+			return "quit by user";
+		case APP_STATUS_LAST_FRAME:
+			return "out of Frame container widgets";
+		case APP_STATUS_EVENT_QUIT:
+			return "quit by Widget event";
+	};
+}
+
+
+
+int Application::s_instances = 0;
+
+
 Application::Application(std::string address):
 		EventNode(address),
 		m_quit(false),
 		m_status(APP_STATUS_OK)
 {
 	MAKE_ADDRESS(Application);
+	s_instances++;
 }
 
 
+/**
+ * Add Frame container widget to the Frame list.
+ * 
+ * \param frame pointer to Frame container widget to append
+ */
 void Application::add_frame(std::shared_ptr<Frame> frame) {
 	m_frames.push_back(frame);
 }
@@ -54,6 +80,14 @@ void Application::handle_event(const Event& event) {
 }
 
 
+/**
+ * Run the Application main loop.
+ * 
+ * Before the actual loop is initiated, the curses terminal environment
+ * is set up.
+ * 
+ * \return status code as defined in the "APP_STATUS_..." definitions
+ */
 int Application::run() {
 	if (m_frames.empty()) {
 		return APP_STATUS_NO_FRAMES;
@@ -76,10 +110,15 @@ int Application::run() {
 	
 	Canvas canvas;
 	
+	// TODO add signal handler for SIGINT that properly quits the Application
+	
 	while (!m_quit) {
 		int c = getch();
 		
 		switch (c) {
+			// FIXME maybe widgets want to use the 'q' key as well.
+			// possible solution: process 'q' key in Frame objects instead.
+			// child widgets can override the 'q' key.
 			case 'q':
 				m_quit = true;
 				m_status = APP_STATUS_USER_QUIT;

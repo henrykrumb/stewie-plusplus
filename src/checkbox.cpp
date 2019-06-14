@@ -9,9 +9,11 @@ CheckBox::CheckBox(
 	std::string label,
 	bool state,
 	bool center,
+	std::string name,
 	std::string address
 ):
 		Widget(address),
+		Evaluatable(name),
 		m_label(label),
 		m_state(state),
 		m_center(center)
@@ -73,4 +75,9 @@ void CheckBox::_show(Canvas& canvas) {
 			y + (h - d.h()) / 2
 		);
 	}
+}
+
+
+eval_variant CheckBox::evaluate() {
+	return eval_variant(m_state);
 }

@@ -8,6 +8,7 @@ Container::Container(std::string address):
 		Widget(address),
 		m_focused_child(nullptr)
 {
+	m_focusable = true;
 }
 
 
@@ -31,6 +32,7 @@ void Container::show(Canvas& canvas) {
 /**
  * Usually, there is no need to display container widgets as they are used
  * to group visible widgets without being visible themselves.
+ * So no need to be abstract.
  */
 void Container::_show(Canvas& canvas) {}
 
@@ -87,6 +89,7 @@ std::shared_ptr<Widget> Container::get_child(std::string address, bool recursive
 		if ((*it)->get_address() == address) {
 			return *it;
 		}
+		
 		if (recursive) {
 			std::shared_ptr<Widget> child = (*it)->get_child(address, recursive);
 			if (child != nullptr) {
@@ -101,6 +104,7 @@ std::shared_ptr<Widget> Container::get_child(std::string address, bool recursive
 
 void Container::pack() {
 	_pack();
+	focus_first();
 	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
 		(*it)->set_focus(*it == m_focused_child && m_focused);
 		(*it)->pack();
@@ -114,14 +118,23 @@ std::size_t Container::children() {
 
 
 bool Container::focus_first() {
-	if (m_children.empty())
+	if (m_children.empty()) {
 		return false;
+	}
+	
 	if (m_focused_child != nullptr) {
 		m_focused_child->set_focus(false);
 	}
-	m_focused_child = *m_children.begin();
-	m_focused_child->set_focus(true);
-	return true;
+	
+	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
+		if ((*it)->is_focusable()) {
+			m_focused_child = *it;
+			m_focused_child->set_focus(true);
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 
@@ -129,21 +142,27 @@ bool Container::focus_next() {
 	if (m_children.empty()) {
 		return false;
 	}
+	
 	auto focus_iter = std::find(
 		m_children.begin(),
 		m_children.end(),
 		m_focused_child
 	);
+	
 	if (focus_iter == m_children.end()) {
 		return false;
 	}
+	
 	focus_iter++;
+	
 	if (focus_iter == m_children.end()) {
 		return false;
 	}
+	
 	m_focused_child->set_focus(false);
 	m_focused_child = *focus_iter;
 	m_focused_child->set_focus(true);
+	
 	return true;
 }
 
@@ -152,18 +171,22 @@ bool Container::focus_previous() {
 	if (m_children.empty()) {
 		return false;
 	}
+	
 	auto focus_iter = std::find(
 		m_children.begin(),
 		m_children.end(),
 		m_focused_child
 	);
+	
 	if (focus_iter == m_children.begin() || focus_iter == m_children.end()) {
 		return false;
 	}
+	
 	focus_iter--;
 	m_focused_child->set_focus(false);
 	m_focused_child = *focus_iter;
 	m_focused_child->set_focus(true);
+	
 	return true;
 }
 

@@ -30,8 +30,6 @@ void VBox::_pack() {
 		(*it)->set_box(box);
 		i++;
 	}
-	
-	focus_first();
 }
 
 

@@ -21,7 +21,6 @@ bool Frame::_add_child(std::shared_ptr<Widget> widget) {
 void Frame::_pack() {
 	if (!m_children.empty()) {
 		m_children[0]->set_box(m_box);
-		focus_first();
 	}
 }
 

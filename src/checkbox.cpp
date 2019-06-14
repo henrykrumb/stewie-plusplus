@@ -79,6 +79,6 @@ void CheckBox::_show(Canvas& canvas) {
 }
 
 
-eval_variant CheckBox::evaluate() {
-	return eval_variant(m_state);
+EvalVariant CheckBox::evaluate() {
+	return EvalVariant(m_state);
 }

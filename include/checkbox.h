@@ -27,7 +27,7 @@ public:
 	virtual void _show(Canvas& canvas);
 	
 	/** methods inherited from Evaluatable **/
-	virtual eval_variant evaluate();
+	virtual EvalVariant evaluate();
 
 protected:
 	std::string m_label;

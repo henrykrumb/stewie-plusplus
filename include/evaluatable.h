@@ -3,7 +3,7 @@
 #include <variant>
 
 
-typedef std::variant<bool, int, float, std::string> eval_variant;
+typedef std::variant<bool, int, float, std::string> EvalVariant;
 
 
 class Evaluatable {
@@ -13,7 +13,7 @@ public:
 	
 	std::string get_name() const;
 	
-	virtual eval_variant evaluate() = 0;
+	virtual EvalVariant evaluate() = 0;
 
 protected:
 	std::string m_name;

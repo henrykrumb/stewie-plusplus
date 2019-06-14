@@ -22,15 +22,15 @@ bool Form::_add_child(std::shared_ptr<Widget> child) {
 }
 
 
-std::map<std::string, eval_variant> Form::evaluate() {
-	std::map<std::string, eval_variant> values;
+std::map<std::string, EvalVariant> Form::evaluate() {
+	std::map<std::string, EvalVariant> values;
 	
 	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
 		std::shared_ptr<Evaluatable> ev =
 				std::dynamic_pointer_cast<Evaluatable>(*it);
 		std::string name = ev->get_name();
 		values.insert(
-				std::pair<std::string, eval_variant>(name, ev->evaluate())
+				std::pair<std::string, EvalVariant>(name, ev->evaluate())
 		);
 	}
 	

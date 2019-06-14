@@ -1,8 +1,10 @@
 #pragma once
-
+#include <functional>
+#include <map>
 #include <memory>
 #include <string>
 #include <variant>
+
 
 typedef std::variant<int, float, long, std::string> EventVariant;
 
@@ -27,25 +29,27 @@ protected:
 };
 
 
+void enqueue_event(Event event);
+void enqueue_event(std::string id, std::string sink="");
+void dispatch_events();
+
 
 class EventNode {
 public:
 	EventNode(std::string address);
 	EventNode(const EventNode&) = delete;
 	virtual ~EventNode();
-
+	
 	std::string get_address() const {
 		return m_address;
 	}
-
+	
 	void send_event(std::string id, std::string sink="");
 	virtual void handle_event(const Event& event) = 0;
+	
+	friend void dispatch_events();
 
 protected:
 	std::string m_address;
+	std::map<std::string, std::function<void(const Event&)>> listeners;
 };
-
-
-void enqueue_event(Event event);
-void enqueue_event(std::string id, std::string sink="");
-void dispatch_events();

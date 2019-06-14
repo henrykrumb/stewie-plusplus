@@ -38,23 +38,34 @@ void dispatch_events() {
 		
 		std::string sink = event.get_sink();
 		
+		/* no sink provided (broadcast) */
 		if (sink.empty()) {
 			for (auto it = event_nodes.begin(); it != event_nodes.end(); ++it) {
 				it->second->handle_event(event);
+				auto listeners = it->second->listeners;
+				try {
+					listeners.at(event.get_id())(event);
+				} catch (std::exception e) {
+					
+				}
 			}
 		}
 		else {
 			EventNode* node = event_nodes.at(sink);
 			node->handle_event(event);
+			auto listeners = node->listeners;
+			try {
+				listeners.at(event.get_id())(event);
+			} catch (std::exception e) {
+				
+			}
 		}
 	}
 }
 
 
 
-Event::Event(std::string id,
-	std::string source,
-	std::string sink):
+Event::Event(std::string id, std::string source, std::string sink):
 		m_id(id),
 		m_source(source),
 		m_sink(sink)

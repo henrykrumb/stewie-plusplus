@@ -4,6 +4,7 @@
 #include "canvas.h"
 #include "checkbox.h"
 #include "container.h"
+#include "error.h"
 #include "evaluatable.h"
 #include "event.h"
 #include "form.h"

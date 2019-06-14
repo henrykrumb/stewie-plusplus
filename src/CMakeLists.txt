@@ -4,6 +4,7 @@ list(APPEND SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/canvas.cpp
 	${CMAKE_CURRENT_LIST_DIR}/checkbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/container.cpp
+	${CMAKE_CURRENT_LIST_DIR}/error.cpp
 	${CMAKE_CURRENT_LIST_DIR}/evaluatable.cpp
 	${CMAKE_CURRENT_LIST_DIR}/event.cpp
 	${CMAKE_CURRENT_LIST_DIR}/form.cpp

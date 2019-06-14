@@ -17,8 +17,12 @@ static void s_exit() {
 }
 
 
-Application::Application() {
-
+Application::Application(std::string address):
+		EventNode(address),
+		m_quit(false),
+		m_status(APP_STATUS_OK)
+{
+	MAKE_ADDRESS(Application);
 }
 
 
@@ -27,35 +31,68 @@ void Application::add_frame(std::shared_ptr<Frame> frame) {
 }
 
 
-void Application::run() {
+void Application::handle_event(const Event& event) {
+	if (event.get_id() == EVENT_NEXT_FRAME) {
+		m_frame_iter++;
+		if (m_frame_iter == m_frames.end()) {
+			m_quit = true;
+			m_status = APP_STATUS_LAST_FRAME;
+		}
+	}
+	else if (event.get_id() == EVENT_PREVIOUS_FRAME) {
+		if (m_frame_iter != m_frames.begin()) {
+			m_frame_iter--;
+		}
+	}
+	else if (event.get_id() == EVENT_QUIT) {
+		m_quit = true;
+		m_status = APP_STATUS_EVENT_QUIT;
+	}
+	else {
+		// no matching event
+	}
+}
+
+
+int Application::run() {
+	if (m_frames.empty()) {
+		return APP_STATUS_NO_FRAMES;
+	}
+	
+	m_frame_iter = m_frames.begin();
 	initscr();
-	m_frames[0]->set_box(Box(0, 0, COLS, LINES));
-	m_frames[0]->pack();
+	
+	auto frame = *(m_frame_iter);
+	frame->set_box(Box(0, 0, COLS, LINES));
+	frame->pack();
+	
 	noecho();
 	cbreak();
 	curs_set(0);
 	keypad(stdscr, 1);
 	timeout(0);
 	
-	bool quit = false;
 	std::atexit(s_exit);
 	
 	Canvas canvas;
 	
-	while (!quit) {
+	while (!m_quit) {
 		int c = getch();
 		
 		switch (c) {
 			case 'q':
-				quit = true;
+				m_quit = true;
+				m_status = APP_STATUS_USER_QUIT;
 				break;
 			default:
-				m_frames[0]->handle_key(c);
+				(*m_frame_iter)->handle_key(c);
 				break;
 		}
 		
 		erase();
-		m_frames[0]->show(canvas);
+		(*m_frame_iter)->show(canvas);
 		dispatch_events();
 	}
+	
+	return m_status;
 }

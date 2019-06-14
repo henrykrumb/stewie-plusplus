@@ -5,7 +5,7 @@
 Form::Form(std::string address):
 		VBox(address)
 {
-
+	MAKE_ADDRESS(Form);
 }
 
 

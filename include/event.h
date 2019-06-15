@@ -14,23 +14,30 @@ class EventNode;
 
 class Event {
 public:
-	Event(std::string id, std::string source, std::string sink="");
+	Event(
+			std::string id,
+			std::string source,
+			std::string sink="",
+			EventVariant data=""
+	);
 	Event(const Event& event);
 	virtual ~Event() {}
 
 	std::string get_id() const { return m_id; }
 	std::string get_source() const { return m_source; }
 	std::string get_sink() const { return m_sink; }
+	EventVariant get_data() const { return m_data; }
 
 protected:
 	std::string m_id;
 	std::string m_source;
 	std::string m_sink;
+	EventVariant m_data;
 };
 
 
 void enqueue_event(Event event);
-void enqueue_event(std::string id, std::string sink="");
+void enqueue_event(std::string id, std::string sink="", EventVariant data="");
 void dispatch_events();
 
 
@@ -44,12 +51,13 @@ public:
 		return m_address;
 	}
 	
-	void send_event(std::string id, std::string sink="");
+	void add_listener(std::function<void(const Event&)> listener);
+	void send_event(std::string id, std::string sink="", EventVariant data="");
 	virtual void handle_event(const Event& event) = 0;
 	
 	friend void dispatch_events();
 
 protected:
 	std::string m_address;
-	std::map<std::string, std::function<void(const Event&)>> listeners;
+	std::vector<std::function<void(const Event&)>> m_listeners;
 };

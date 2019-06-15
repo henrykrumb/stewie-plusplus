@@ -22,6 +22,7 @@
 
 #define EVENT_NEXT_FRAME "next frame"
 #define EVENT_PREVIOUS_FRAME "previous frame"
+#define EVENT_SWITCH_FRAME "switch frame"
 #define EVENT_QUIT "quit"
 
 /**

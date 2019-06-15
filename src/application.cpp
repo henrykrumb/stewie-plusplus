@@ -4,6 +4,7 @@
 
 #include "application.h"
 #include "canvas.h"
+#include "error.h"
 #include "event.h"
 #include "geometry.h"
 
@@ -30,6 +31,7 @@ std::string application_status_to_string(int status) {
 		case APP_STATUS_EVENT_QUIT:
 			return "quit by Widget event";
 	};
+	return "unknown status code";
 }
 
 
@@ -68,6 +70,19 @@ void Application::handle_event(const Event& event) {
 	else if (event.get_id() == EVENT_PREVIOUS_FRAME) {
 		if (m_frame_iter != m_frames.begin()) {
 			m_frame_iter--;
+		}
+	}
+	else if (event.get_id() == EVENT_SWITCH_FRAME) {
+		try {
+			auto frame = std::get<std::string>(event.get_data());
+			for (auto it = m_frames.begin(); it != m_frames.end(); ++it) {
+				if ((*it)->get_address() == frame) {
+					m_frame_iter = it;
+					break;
+				}
+			}
+		} catch (const std::bad_variant_access& a) {
+			
 		}
 	}
 	else if (event.get_id() == EVENT_QUIT) {
@@ -123,6 +138,10 @@ int Application::run() {
 				m_quit = true;
 				m_status = APP_STATUS_USER_QUIT;
 				break;
+			case KEY_RESIZE:
+				frame->set_box(Box(0, 0, COLS, LINES));
+				frame->pack();
+				break;
 			default:
 				(*m_frame_iter)->handle_key(c);
 				break;
@@ -132,6 +151,8 @@ int Application::run() {
 		(*m_frame_iter)->show(canvas);
 		dispatch_events();
 	}
+	
+	s_exit();
 	
 	return m_status;
 }

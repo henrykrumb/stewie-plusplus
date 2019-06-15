@@ -11,7 +11,6 @@ public:
 	Form(const Form& form) = delete;
 	virtual ~Form();
 	
-	virtual bool _add_child(std::shared_ptr<Widget> child);
 	std::map<std::string, EvalVariant> evaluate();
 
 protected:

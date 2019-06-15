@@ -13,7 +13,6 @@ public:
 		std::string label,
 		bool state=false,
 		bool center=true,
-		std::string name="",
 		std::string address=""
 	);
 	CheckBox(const CheckBox&) = delete;

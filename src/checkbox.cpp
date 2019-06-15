@@ -10,11 +10,10 @@ CheckBox::CheckBox(
 	std::string label,
 	bool state,
 	bool center,
-	std::string name,
 	std::string address
 ):
 		Widget(address),
-		Evaluatable(name),
+		Evaluatable(label),
 		m_label(label),
 		m_state(state),
 		m_center(center)

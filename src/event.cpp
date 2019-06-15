@@ -1,6 +1,7 @@
 #include <map>
 #include <queue>
 
+#include "error.h"
 #include "event.h"
 
 
@@ -26,14 +27,22 @@ void enqueue_event(Event event) {
 }
 
 
-void enqueue_event(std::string id, std::string source, std::string sink) {
-	event_queue.push(Event(id, source, sink));
+void enqueue_event(
+		std::string id,
+		std::string source,
+		std::string sink,
+		EventVariant data
+) {
+	event_queue.push(Event(id, source, sink, data));
 }
 
 
 void dispatch_events() {
-	while (!event_queue.empty()) {
-		Event event = event_queue.front();
+	/* copy event queue */
+	std::queue<Event> queue = event_queue;
+	while (!queue.empty()) {
+		Event event = queue.front();
+		queue.pop();
 		event_queue.pop();
 		
 		std::string sink = event.get_sink();
@@ -42,33 +51,33 @@ void dispatch_events() {
 		if (sink.empty()) {
 			for (auto it = event_nodes.begin(); it != event_nodes.end(); ++it) {
 				it->second->handle_event(event);
-				auto listeners = it->second->listeners;
-				try {
-					listeners.at(event.get_id())(event);
-				} catch (std::exception e) {
-					
+				auto listeners = it->second->m_listeners;
+				for (auto jt = listeners.begin(); jt != listeners.end(); ++jt) {
+					(*jt)(event);
 				}
 			}
 		}
 		else {
 			EventNode* node = event_nodes.at(sink);
 			node->handle_event(event);
-			auto listeners = node->listeners;
-			try {
-				listeners.at(event.get_id())(event);
-			} catch (std::exception e) {
-				
+			auto listeners = node->m_listeners;
+			for (auto it = listeners.begin(); it != listeners.end(); ++it) {
+				(*it)(event);
 			}
 		}
 	}
 }
 
 
-
-Event::Event(std::string id, std::string source, std::string sink):
+Event::Event(
+	std::string id,
+	std::string source,
+	std::string sink,
+	EventVariant data):
 		m_id(id),
 		m_source(source),
-		m_sink(sink)
+		m_sink(sink),
+		m_data(data)
 {
 }
 
@@ -93,7 +102,16 @@ EventNode::~EventNode() {
 }
 
 
-void EventNode::send_event(std::string id, std::string sink) {
-	enqueue_event(Event(id, m_address, sink));
+void EventNode::add_listener(std::function<void(const Event&)> listener) {
+	m_listeners.push_back(listener);
+}
+
+
+void EventNode::send_event(
+		std::string id,
+		std::string sink,
+		EventVariant data
+) {
+	enqueue_event(Event(id, m_address, sink, data));
 }
 

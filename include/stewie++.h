@@ -1,6 +1,7 @@
 #pragma once
 
 #include "application.h"
+#include "button.h"
 #include "canvas.h"
 #include "checkbox.h"
 #include "container.h"

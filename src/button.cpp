@@ -15,6 +15,11 @@ Button::Button(std::string label, bool center, std::string address):
 }
 
 
+void Button::handle_event(const Event& event) {
+	
+}
+
+
 int Button::_handle_key(const int& key) {
 	if (key == ' ') {
 		send_event("activate");

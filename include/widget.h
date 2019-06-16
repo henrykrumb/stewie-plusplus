@@ -30,7 +30,7 @@ public:
 		std::string address,
 		bool recursive=true) { return nullptr; }
 	
-	void set_focus(const bool& focus) { m_focused = focus; }
+	virtual void set_focus(const bool& focus) { m_focused = focus; }
 	bool is_focusable() const { return m_focusable; }
 	bool is_focused() const { return m_focused; }
 	

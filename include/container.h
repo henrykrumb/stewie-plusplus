@@ -42,7 +42,8 @@ public:
 	std::size_t children();
 	
 	virtual std::map<std::string, EvalVariant> evaluate(bool recursive=true);
-
+	
+	virtual void set_focus(const bool& focus);
 	bool focus_first();
 	bool focus_next();
 	bool focus_previous();

@@ -48,9 +48,6 @@ int Container::handle_key(const int& c) {
 
 bool Container::add_child(std::shared_ptr<Widget> widget) {
 	if (_add_child(widget)) {
-		if (m_focused_child == nullptr && widget->is_focusable()) {
-			m_focused_child = widget;
-		}
 		widget->set_parent(this);
 		m_children.push_back(widget);
 		pack();
@@ -106,7 +103,6 @@ void Container::pack() {
 	_pack();
 	focus_first();
 	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
-		(*it)->set_focus(*it == m_focused_child && m_focused);
 		(*it)->pack();
 	}
 }
@@ -139,6 +135,18 @@ std::map<std::string, EvalVariant> Container::evaluate(bool recursive) {
 	}
 	
 	return values;
+}
+
+
+void Container::set_focus(const bool& focus) {
+	if (focus) {
+		focus_first();
+	}
+	else {
+		for (auto it = m_children.begin(); it != m_children.end(); ++it) {
+			(*it)->set_focus(false);
+		}
+	}
 }
 
 

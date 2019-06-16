@@ -1,5 +1,4 @@
 #include <curses.h>
-#include <iostream>
 
 #include "vbox.h"
 

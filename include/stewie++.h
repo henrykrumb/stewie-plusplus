@@ -10,5 +10,8 @@
 #include "event.h"
 #include "frame.h"
 #include "geometry.h"
+#include "optionbox.h"
+#include "progressbar.h"
+#include "utils.h"
 #include "widget.h"
 #include "vbox.h"

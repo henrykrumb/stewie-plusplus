@@ -24,6 +24,10 @@ int example_1(int argc, char* argv[]) {
 	auto chk_filter_dc = std::make_shared<CheckBox>("dc");
 	form->add_child(std::dynamic_pointer_cast<Widget>(chk_filter_dc));
 	
+	std::vector<std::string> options { "20", "60", "80", "120", "200" };
+	auto opt_frequency = std::make_shared<OptionBox>("freq", options);
+	form->add_child(std::dynamic_pointer_cast<Widget>(opt_frequency));
+	
 	/* submit */
 	auto btn_submit = std::make_shared<Button>("submit", true, "submit");
 	form->add_child(std::dynamic_pointer_cast<Widget>(btn_submit));
@@ -44,7 +48,14 @@ int example_1(int argc, char* argv[]) {
 	app->run();
 	
 	for (auto it = evaluation.begin(); it != evaluation.end(); ++it) {
-		std::cout << it->first << ":\t" << std::get<bool>(it->second) << std::endl;
+		try {
+			bool bvalue = std::get<bool>(it->second);
+			std::cout << it->first << ":\t" << bvalue << std::endl;
+		}
+		catch (const std::bad_variant_access& bva) {
+			std::string svalue = std::get<std::string>(it->second);
+			std::cout << it->first << ":\t" << svalue << std::endl;
+		}
 	}
 	
 	return EXIT_SUCCESS;

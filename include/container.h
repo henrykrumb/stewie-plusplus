@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "evaluatable.h"
 #include "event.h"
 #include "geometry.h"
 #include "widget.h"
@@ -35,6 +36,8 @@ public:
 	virtual std::shared_ptr<Widget> get_child(std::string address, bool recursive=true);
 
 	std::size_t children();
+	
+	virtual std::map<std::string, EvalVariant> evaluate(bool recursive=true);
 
 	bool focus_first();
 	bool focus_next();

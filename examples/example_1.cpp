@@ -10,7 +10,7 @@ int example_1(int argc, char* argv[]) {
 	app = std::make_shared<Application>("application");
 	
 	auto frame = std::make_shared<Frame>();
-	auto form = std::make_shared<Form>();
+	auto form = std::make_shared<VBox>();
 	
 	/* filter AC wide */
 	auto chk_filter_ac_wide = std::make_shared<CheckBox>("ac wide");

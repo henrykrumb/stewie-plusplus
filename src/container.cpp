@@ -117,6 +117,31 @@ std::size_t Container::children() {
 }
 
 
+std::map<std::string, EvalVariant> Container::evaluate(bool recursive) {
+	std::map<std::string, EvalVariant> values;
+	
+	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
+		std::shared_ptr<Evaluatable> ev =
+				std::dynamic_pointer_cast<Evaluatable>(*it);
+		if (ev != nullptr) {
+			std::string name = ev->get_name();
+			values.insert(
+				std::pair<std::string, EvalVariant>(name, ev->evaluate())
+			);
+		}
+		
+		if (recursive) {
+			std::shared_ptr<Container> c = std::dynamic_pointer_cast<Container>(*it);
+			if (c != nullptr) {
+				values.merge(c->evaluate(recursive));
+			}
+		}
+	}
+	
+	return values;
+}
+
+
 bool Container::focus_first() {
 	if (m_children.empty()) {
 		return false;

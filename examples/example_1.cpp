@@ -11,13 +11,17 @@ int example_1(int argc, char* argv[]) {
 	auto frame = std::make_shared<Frame>();
 	auto form = std::make_shared<VBox>();
 	
+	
+	auto box_ac = std::make_shared<HBox>();
 	/* filter AC wide */
 	auto chk_filter_ac_wide = std::make_shared<CheckBox>("ac wide");
-	ADD_CHILD(form, chk_filter_ac_wide);
+	ADD_CHILD(box_ac, chk_filter_ac_wide);
 	
 	/* filter AC narrow */
 	auto chk_filter_ac_narrow = std::make_shared<CheckBox>("ac narrow");
-	ADD_CHILD(form, chk_filter_ac_narrow);
+	ADD_CHILD(box_ac, chk_filter_ac_narrow);
+	
+	ADD_CHILD(form, box_ac);
 	
 	/* filter DC */
 	auto chk_filter_dc = std::make_shared<CheckBox>("dc");

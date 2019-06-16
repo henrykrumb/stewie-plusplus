@@ -10,6 +10,7 @@
 #include "event.h"
 #include "frame.h"
 #include "geometry.h"
+#include "hbox.h"
 #include "optionbox.h"
 #include "progressbar.h"
 #include "utils.h"

@@ -9,6 +9,7 @@ list(APPEND SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/event.cpp
 	${CMAKE_CURRENT_LIST_DIR}/frame.cpp
 	${CMAKE_CURRENT_LIST_DIR}/geometry.cpp
+	${CMAKE_CURRENT_LIST_DIR}/hbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/label.cpp
 	${CMAKE_CURRENT_LIST_DIR}/listbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/optionbox.cpp

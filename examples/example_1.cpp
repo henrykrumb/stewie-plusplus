@@ -4,6 +4,9 @@
 
 #include "example_1.h"
 
+// TODO move this macro
+#define ADD_CHILD(parent, child) \
+	parent->add_child(std::dynamic_pointer_cast<Widget>(child));
 
 int example_1(int argc, char* argv[]) {
 	std::shared_ptr<Application> app;
@@ -14,25 +17,29 @@ int example_1(int argc, char* argv[]) {
 	
 	/* filter AC wide */
 	auto chk_filter_ac_wide = std::make_shared<CheckBox>("ac wide");
-	form->add_child(std::dynamic_pointer_cast<Widget>(chk_filter_ac_wide));
+	ADD_CHILD(form, chk_filter_ac_wide);
 	
 	/* filter AC narrow */
 	auto chk_filter_ac_narrow = std::make_shared<CheckBox>("ac narrow");
-	form->add_child(std::dynamic_pointer_cast<Widget>(chk_filter_ac_narrow));
+	ADD_CHILD(form, chk_filter_ac_narrow);
 	
 	/* filter DC */
 	auto chk_filter_dc = std::make_shared<CheckBox>("dc");
-	form->add_child(std::dynamic_pointer_cast<Widget>(chk_filter_dc));
+	ADD_CHILD(form, chk_filter_dc);
 	
 	std::vector<std::string> options { "20", "60", "80", "120", "200" };
 	auto opt_frequency = std::make_shared<OptionBox>("freq", options);
-	form->add_child(std::dynamic_pointer_cast<Widget>(opt_frequency));
+	ADD_CHILD(form, opt_frequency);
+	
+	auto prg_1 = std::make_shared<ProgressBar>("progress", "progress");
+	prg_1->set_progress(0.5f);
+	ADD_CHILD(form, prg_1);
 	
 	/* submit */
 	auto btn_submit = std::make_shared<Button>("submit", true, "submit");
-	form->add_child(std::dynamic_pointer_cast<Widget>(btn_submit));
+	ADD_CHILD(form, btn_submit);
 	
-	frame->add_child(std::dynamic_pointer_cast<Widget>(form));
+	ADD_CHILD(frame, form);
 	app->add_frame(frame);
 	
 	std::map<std::string, EvalVariant> evaluation;
@@ -53,8 +60,13 @@ int example_1(int argc, char* argv[]) {
 			std::cout << it->first << ":\t" << bvalue << std::endl;
 		}
 		catch (const std::bad_variant_access& bva) {
-			std::string svalue = std::get<std::string>(it->second);
-			std::cout << it->first << ":\t" << svalue << std::endl;
+			try {
+				std::string svalue = std::get<std::string>(it->second);
+				std::cout << it->first << ":\t" << svalue << std::endl;
+			} catch (const std::bad_variant_access& bva2) {
+				float fvalue = std::get<float>(it->second);
+				std::cout << it->first << ":\t" << fvalue << std::endl;
+			}
 		}
 	}
 	

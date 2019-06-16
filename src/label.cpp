@@ -13,12 +13,15 @@ Label::Label(std::string label, std::string address):
 
 
 void Label::_show(Canvas& canvas) {
-	if (!m_label.empty()) {
-		Dimension textsize = stringsize(m_label);
-		int textx = round((m_box.w() - textsize.w()) / 2.0f);
-		int texty = round((m_box.h() - textsize.h()) / 2.0f);
-		canvas.draw_text(m_label, m_box.x() + textx, m_box.y() + texty);
-	}
+	canvas.draw_frame(m_box);
+	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
+	
+	Dimension d = stringsize(m_label);
+	canvas.draw_text(
+		m_label,
+		x + (w - d.w()) / 2,
+		y + (h - d.h()) / 2
+	);
 }
 
 

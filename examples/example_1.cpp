@@ -6,8 +6,7 @@
 
 
 int example_1(int argc, char* argv[]) {
-	std::shared_ptr<Application> app;
-	app = std::make_shared<Application>("application");
+	auto app = std::make_shared<Application>("application");
 	
 	auto frame = std::make_shared<Frame>();
 	auto form = std::make_shared<VBox>();

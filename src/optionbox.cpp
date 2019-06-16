@@ -1,3 +1,4 @@
+#include <cmath>
 #include <sstream>
 
 #include "error.h"
@@ -77,15 +78,15 @@ void OptionBox::_show(Canvas& canvas) {
 	if (m_center) {
 		canvas.draw_text(
 			text,
-			x + (w - d.w()) / 2,
-			y + (h - d.h()) / 2
+			x + round((float) (w - d.w()) / 2.0f),
+			y + round((float) (h - d.h()) / 2.0f)
 		);
 	}
 	else {
 		canvas.draw_text(
 			text,
 			x,
-			y + (h - d.h()) / 2
+			y + round((float) (h - d.h()) / 2.0f)
 		);
 	}
 }

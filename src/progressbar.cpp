@@ -1,3 +1,4 @@
+#include <cmath>
 #include <sstream>
 
 #include "progressbar.h"
@@ -68,8 +69,8 @@ void ProgressBar::_show(Canvas& canvas) {
 	Dimension d = stringsize(text);
 	canvas.draw_text(
 		text,
-		x + (w - d.w()) / 2,
-		y + (h - d.h()) / 2
+		x + round((float) (w - d.w()) / 2.0f),
+		y + round((float) (h - d.h()) / 2.0f)
 	);
 }
 

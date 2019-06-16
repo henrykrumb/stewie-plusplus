@@ -21,7 +21,7 @@ void Button::handle_event(const Event& event) {
 
 
 int Button::_handle_key(const int& key) {
-	if (key == ' ') {
+	if (key == ' ' || key == '\n') {
 		send_event("activate");
 		return 0;
 	}

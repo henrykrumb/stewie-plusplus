@@ -178,17 +178,22 @@ bool Container::focus_next() {
 		return false;
 	}
 	
-	focus_iter++;
-	
-	if (focus_iter == m_children.end()) {
-		return false;
+	while (true) {
+		focus_iter++;
+		
+		if (focus_iter == m_children.end()) {
+			return false;
+		}
+		
+		if ((*focus_iter)->is_focusable()) {
+			m_focused_child->set_focus(false);
+			m_focused_child = *focus_iter;
+			m_focused_child->set_focus(true);
+			return true;
+		}
 	}
 	
-	m_focused_child->set_focus(false);
-	m_focused_child = *focus_iter;
-	m_focused_child->set_focus(true);
-	
-	return true;
+	return false;
 }
 
 
@@ -207,11 +212,20 @@ bool Container::focus_previous() {
 		return false;
 	}
 	
-	focus_iter--;
-	m_focused_child->set_focus(false);
-	m_focused_child = *focus_iter;
-	m_focused_child->set_focus(true);
-	
-	return true;
+	while (true) {
+		focus_iter--;
+		
+		if ((*focus_iter)->is_focusable()) {
+			m_focused_child->set_focus(false);
+			m_focused_child = *focus_iter;
+			m_focused_child->set_focus(true);
+			return true;
+		}
+		
+		if (focus_iter == m_children.begin()) {
+			break;
+		}
+	}
+	return false;
 }
 

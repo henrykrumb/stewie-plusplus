@@ -4,9 +4,6 @@
 
 #include "example_1.h"
 
-// TODO move this macro
-#define ADD_CHILD(parent, child) \
-	parent->add_child(std::dynamic_pointer_cast<Widget>(child));
 
 int example_1(int argc, char* argv[]) {
 	std::shared_ptr<Application> app;

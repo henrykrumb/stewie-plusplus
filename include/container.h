@@ -7,6 +7,10 @@
 #include "geometry.h"
 #include "widget.h"
 
+/* simplify adding shared_ptr|s of Widgets to a Container */
+#define ADD_CHILD(parent, child) \
+	parent->add_child(std::dynamic_pointer_cast<Widget>(child));
+
 
 class Container: public Widget {
 public:

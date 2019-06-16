@@ -11,7 +11,7 @@ public:
 	Form(const Form& form) = delete;
 	virtual ~Form();
 	
-	std::map<std::string, EvalVariant> evaluate();
+	std::map<std::string, EvalVariant> evaluate(bool recursive=true);
 
 protected:
 };

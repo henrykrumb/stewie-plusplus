@@ -21,7 +21,22 @@ void Canvas::draw_text(std::string str, int x, int y) {
 
 
 void Canvas::draw_frame(Box box, bool thick) {
+	int x = box.x(), y = box.y(), w = box.w(), h = box.h();
 	
+	for (int fy = 1; fy < h; fy++) {
+		draw_char('|', x, fy + y);
+		draw_char('|', x + w - 1, fy + y);
+	}
+	
+	for (int fx = 1; fx < w - 1; fx++) {
+		draw_char('-', fx + x, y);
+		draw_char('-', fx + x, y + h);
+	}
+	
+	draw_char('+', x, y);
+	draw_char('+', x + w - 1, y);
+	draw_char('+', x + w - 1, y + h);
+	draw_char('+', x, y + h);
 }
 
 

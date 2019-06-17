@@ -29,13 +29,13 @@ void CheckBox::handle_event(const Event& event) {
 }
 
 
-int CheckBox::_handle_key(const int& c) {
-	if (c == ' ') {
+int CheckBox::_handle_key(const int& key) {
+	if (key == ' ' || key == '\n') {
 		m_state = !m_state;
 		send_event("activate");
 		return 0;
 	}
-	return c;
+	return key;
 }
 
 

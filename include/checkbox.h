@@ -22,7 +22,7 @@ public:
 	virtual void handle_event(const Event& event);
 	
 	/** methods inherited from Widget **/
-	virtual int _handle_key(const int& c);
+	virtual int _handle_key(const int& key);
 	virtual void _show(Canvas& canvas);
 	
 	/** methods inherited from Evaluatable **/

@@ -35,10 +35,14 @@ void VBox::_pack() {
 int VBox::_handle_key(const int& key) {
 	switch (key) {
 		case KEY_UP:
-			focus_previous();
+			if (!focus_previous()) {
+				return key;
+			}
 			break;
 		case KEY_DOWN:
-			focus_next();
+			if (!focus_next()) {
+				return key;
+			}
 			break;
 		default: return key;
 	}

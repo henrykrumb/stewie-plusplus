@@ -38,8 +38,9 @@ public:
 	virtual void pack();
 
 	virtual std::shared_ptr<Widget> get_child(std::string address, bool recursive=true);
-
-	std::size_t children();
+	
+	std::vector<std::shared_ptr<Widget>> get_children() const;
+	std::size_t children() const;
 	
 	virtual std::map<std::string, EvalVariant> evaluate(bool recursive=true);
 	

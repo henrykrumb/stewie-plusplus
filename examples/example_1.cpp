@@ -14,12 +14,14 @@ int example_1(int argc, char* argv[]) {
 	
 	auto box_ac = std::make_shared<HBox>();
 	/* filter AC wide */
-	auto chk_filter_ac_wide = std::make_shared<CheckBox>("ac wide");
-	ADD_CHILD(box_ac, chk_filter_ac_wide);
+	auto rdb_filter_ac_wide = std::make_shared<RadioButton>("ac wide");
+	ADD_CHILD(box_ac, rdb_filter_ac_wide);
 	
 	/* filter AC narrow */
-	auto chk_filter_ac_narrow = std::make_shared<CheckBox>("ac narrow");
-	ADD_CHILD(box_ac, chk_filter_ac_narrow);
+	auto rdb_filter_ac_narrow = std::make_shared<RadioButton>("ac narrow");
+	ADD_CHILD(box_ac, rdb_filter_ac_narrow);
+	
+	rdb_filter_ac_wide->select();
 	
 	ADD_CHILD(form, box_ac);
 	

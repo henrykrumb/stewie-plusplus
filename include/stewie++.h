@@ -13,6 +13,7 @@
 #include "hbox.h"
 #include "optionbox.h"
 #include "progressbar.h"
+#include "radiobutton.h"
 #include "utils.h"
 #include "widget.h"
 #include "vbox.h"

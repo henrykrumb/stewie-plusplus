@@ -108,8 +108,13 @@ void Container::pack() {
 }
 
 
-std::size_t Container::children() {
+std::size_t Container::children() const {
 	return m_children.size();
+}
+
+
+std::vector<std::shared_ptr<Widget>> Container::get_children() const {
+	return m_children;
 }
 
 

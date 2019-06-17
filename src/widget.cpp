@@ -12,7 +12,8 @@ Widget::Widget(std::string address):
 		m_box(0, 0, 0, 0),
 		m_focusable(false),
 		m_focused(false),
-		m_visible(true) {
+		m_visible(true)
+{
 	s_instances++;
 }
 

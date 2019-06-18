@@ -6,3 +6,4 @@
 
 
 Dimension stringsize(std::string str);
+int roundi(float f);

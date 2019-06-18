@@ -11,7 +11,6 @@ int example_1(int argc, char* argv[]) {
 	auto frame = std::make_shared<Frame>();
 	auto form = std::make_shared<VBox>();
 	
-	
 	auto box_ac = std::make_shared<HBox>();
 	/* filter AC wide */
 	auto rdb_filter_ac_wide = std::make_shared<RadioButton>("ac wide");

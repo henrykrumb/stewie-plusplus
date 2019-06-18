@@ -69,8 +69,8 @@ void ProgressBar::_show(Canvas& canvas) {
 	Dimension d = stringsize(text);
 	canvas.draw_text(
 		text,
-		x + round((float) (w - d.w()) / 2.0f),
-		y + round((float) (h - d.h()) / 2.0f)
+		x + roundi((float) (w - d.w()) / 2.0f),
+		y + roundi((float) (h - d.h()) / 2.0f)
 	);
 }
 

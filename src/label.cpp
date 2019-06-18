@@ -19,8 +19,8 @@ void Label::_show(Canvas& canvas) {
 	Dimension d = stringsize(m_label);
 	canvas.draw_text(
 		m_label,
-		x + (w - d.w()) / 2,
-		y + (h - d.h()) / 2
+		x + roundi((float) (w - d.w()) / 2.0f),
+		y + roundi((float) (h - d.h()) / 2.0f)
 	);
 }
 

@@ -58,15 +58,15 @@ void RadioButton::_show(Canvas& canvas) {
 	if (m_center) {
 		canvas.draw_text(
 			text,
-			x + round((float) (w - d.w()) / 2.0f),
-			y + round((float) (h - d.h()) / 2.0f)
+			x + roundi((float) (w - d.w()) / 2.0f),
+			y + roundi((float) (h - d.h()) / 2.0f)
 		);
 	}
 	else {
 		canvas.draw_text(
 			text,
 			x,
-			y + round((float) (h - d.h()) / 2.0f)
+			y + roundi((float) (h - d.h()) / 2.0f)
 		);
 	}
 }

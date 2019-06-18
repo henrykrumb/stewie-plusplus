@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "utils.h"
 
 
@@ -24,4 +26,9 @@ Dimension stringsize(std::string str) {
 	}
 	
 	return Dimension(w, h);
+}
+
+
+int roundi(float f) {
+	return (int) roundf(f);
 }

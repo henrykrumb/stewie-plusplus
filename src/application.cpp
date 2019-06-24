@@ -112,7 +112,7 @@ int Application::run() {
 	initscr();
 	
 	auto frame = *(m_frame_iter);
-	frame->set_box(Box(0, 0, COLS, LINES));
+	frame->set_box(Box(0, 0, COLS, LINES - 1));
 	frame->pack();
 	
 	noecho();
@@ -139,7 +139,7 @@ int Application::run() {
 				m_status = APP_STATUS_USER_QUIT;
 				break;
 			case KEY_RESIZE:
-				frame->set_box(Box(0, 0, COLS, LINES));
+				frame->set_box(Box(0, 0, COLS, LINES - 1));
 				frame->pack();
 				break;
 			default:

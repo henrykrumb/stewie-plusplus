@@ -46,7 +46,6 @@ void ProgressBar::handle_event(const Event& event) {
 
 
 void ProgressBar::_show(Canvas& canvas) {
-	canvas.draw_frame(m_box);
 	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
 	
 	std::stringstream sstr;

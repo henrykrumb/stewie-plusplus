@@ -39,16 +39,9 @@ void RadioButton::select() {
 
 
 void RadioButton::_show(Canvas& canvas) {
-	canvas.draw_frame(m_box);
 	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
 	std::stringstream sstr;
 	
-	if (m_focused) {
-		sstr << ">> ";
-	}
-	else {
-		sstr << "   ";
-	}
 	sstr << "(";
 	sstr << (m_state ? "o" : " ");
 	sstr << ") " << m_label;

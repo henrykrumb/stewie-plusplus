@@ -58,16 +58,9 @@ int OptionBox::_handle_key(const int& c) {
 
 
 void OptionBox::_show(Canvas& canvas) {
-	canvas.draw_frame(m_box);
 	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
 	std::stringstream sstr;
 	
-	if (m_focused) {
-		sstr << ">> ";
-	}
-	else {
-		sstr << "   ";
-	}
 	sstr << m_label;
 	sstr << " [-] ";
 	sstr << *m_option_iter;

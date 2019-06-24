@@ -8,9 +8,10 @@
 
 typedef std::variant<int, float, long, std::string> EventVariant;
 
-
 class EventNode;
 
+void register_node(EventNode* node);
+void unregister_node(EventNode* node);
 
 class Event {
 public:
@@ -66,5 +67,5 @@ protected:
 	bool m_active;
 	std::string m_address;
 	std::vector<std::function<void(const Event&)>> m_listeners;
-	std::map<std::string, std::function<void(const Event&)>> m_listener_map;
+	std::map<std::string, std::vector<std::function<void(const Event&)>>> m_listener_map;
 };

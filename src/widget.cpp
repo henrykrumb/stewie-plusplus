@@ -38,7 +38,7 @@ void Widget::show(Canvas& canvas) {
 		if (m_focused) {
 			canvas.draw_frame(m_box);
 		}
-		 _show(canvas);
+		_show(canvas);
 	}
 }
 

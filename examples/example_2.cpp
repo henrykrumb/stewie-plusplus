@@ -52,7 +52,7 @@ std::shared_ptr<Frame> make_frame_1() {
 }
 
 
-std::shared_ptr<Frame> make_frame_2() {
+std::shared_ptr<Frame> make_frame_2(std::shared_ptr<Application> app) {
 	auto frame = std::make_shared<Frame>();
 	auto vbox = std::make_shared<VBox>();
 	
@@ -73,9 +73,8 @@ std::shared_ptr<Frame> make_frame_2() {
 	
 	ADD_CHILD(frame, vbox);
 	
-	frame->add_listener(
+	frame->add_listener("activate",
 		[&frame] (const Event& e) {
-			frame->send_event(EVENT_QUIT, "application");
 			if (e.get_source() == "btn_pointcloud") {
 				frame->send_event(EVENT_NEXT_FRAME, "application");
 			}
@@ -99,7 +98,7 @@ int example_2(int argc, char* argv[]) {
 	auto app = std::make_shared<Application>("application");
 	
 	auto frame_1 = make_frame_1();
-	auto frame_2 = make_frame_2();
+	auto frame_2 = make_frame_2(app);
 	
 	app->add_frame(frame_1);
 	app->add_frame(frame_2);

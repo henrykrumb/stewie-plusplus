@@ -52,6 +52,8 @@ public:
 	int run();
 
 protected:
+	void p_switch_frame(std::vector<std::shared_ptr<Frame>>::iterator it);
+	
 	static int s_instances;
 	
 	bool m_quit;

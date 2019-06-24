@@ -55,21 +55,33 @@ Application::Application(std::string address):
  * \param frame pointer to Frame container widget to append
  */
 void Application::add_frame(std::shared_ptr<Frame> frame) {
+	frame->set_active(false);
 	m_frames.push_back(frame);
+}
+
+
+void Application::p_switch_frame(std::vector<std::shared_ptr<Frame>>::iterator it) {
+	(*m_frame_iter)->set_active(false);
+	if (it == m_frames.end()) {
+		m_quit = true;
+		m_status = APP_STATUS_LAST_FRAME;
+		return;
+	}
+	m_frame_iter = it;
+	auto frame = *m_frame_iter;
+	frame->set_active(true);
+	frame->set_box(Box(0, 0, COLS, LINES - 1));
+	frame->pack();
 }
 
 
 void Application::handle_event(const Event& event) {
 	if (event.get_id() == EVENT_NEXT_FRAME) {
-		m_frame_iter++;
-		if (m_frame_iter == m_frames.end()) {
-			m_quit = true;
-			m_status = APP_STATUS_LAST_FRAME;
-		}
+		p_switch_frame(m_frame_iter + 1);
 	}
 	else if (event.get_id() == EVENT_PREVIOUS_FRAME) {
 		if (m_frame_iter != m_frames.begin()) {
-			m_frame_iter--;
+			p_switch_frame(m_frame_iter - 1);
 		}
 	}
 	else if (event.get_id() == EVENT_SWITCH_FRAME) {
@@ -77,7 +89,7 @@ void Application::handle_event(const Event& event) {
 			auto frame = std::get<std::string>(event.get_data());
 			for (auto it = m_frames.begin(); it != m_frames.end(); ++it) {
 				if ((*it)->get_address() == frame) {
-					m_frame_iter = it;
+					p_switch_frame(it);
 					break;
 				}
 			}
@@ -112,6 +124,7 @@ int Application::run() {
 	initscr();
 	
 	auto frame = *(m_frame_iter);
+	frame->set_active(true);
 	frame->set_box(Box(0, 0, COLS, LINES - 1));
 	frame->pack();
 	
@@ -129,6 +142,7 @@ int Application::run() {
 	
 	while (!m_quit) {
 		int c = getch();
+		auto frame = *(m_frame_iter);
 		
 		switch (c) {
 			// FIXME maybe widgets want to use the 'q' key as well.
@@ -143,12 +157,14 @@ int Application::run() {
 				frame->pack();
 				break;
 			default:
-				(*m_frame_iter)->handle_key(c);
+				if (c >= 0) {
+					frame->handle_key(c);
+				}
 				break;
 		}
 		
 		erase();
-		(*m_frame_iter)->show(canvas);
+		frame->show(canvas);
 		dispatch_events();
 	}
 	

@@ -9,7 +9,7 @@ static std::queue<Event> event_queue;
 static std::map<std::string, EventNode*> event_nodes;
 
 
-static void register_node(EventNode* node) {
+void register_node(EventNode* node) {
 	event_nodes.insert(
 		std::pair<std::string, EventNode*>(
 			node->get_address(), node
@@ -17,7 +17,7 @@ static void register_node(EventNode* node) {
 }
 
 
-static void unregister_node(EventNode* node) {
+void unregister_node(EventNode* node) {
 	event_nodes.erase(node->get_address());
 }
 
@@ -50,18 +50,20 @@ void dispatch_events() {
 		/* no sink provided (broadcast) */
 		if (sink.empty()) {
 			for (auto it = event_nodes.begin(); it != event_nodes.end(); ++it) {
-				if (!it->second->m_active) {
+				if (not it->second->m_active) {
 					continue;
 				}
 				it->second->handle_event(event);
 				auto listener_map = it->second->m_listener_map;
 				try {
-					auto listener = listener_map.at(event.get_id());
-					listener(event);
+					auto map_listeners = listener_map.at(event.get_id());
+					for (auto& listener: map_listeners) {
+						listener(event);
+					}
 				} catch (std::exception& e) {}
 				auto listeners = it->second->m_listeners;
-				for (auto jt = listeners.begin(); jt != listeners.end(); ++jt) {
-					(*jt)(event);
+				for (auto& listener: listeners) {
+					listener(event);
 				}
 			}
 		}
@@ -72,12 +74,14 @@ void dispatch_events() {
 				node->handle_event(event);
 				auto listener_map = node->m_listener_map;
 				try {
-					auto listener = listener_map.at(event.get_id());
-					listener(event);
+					auto map_listeners = listener_map.at(event.get_id());
+					for (auto& listener: map_listeners) {
+						listener(event);
+					}
 				} catch (std::exception& e) {}
 				auto listeners = node->m_listeners;
-				for (auto it = listeners.begin(); it != listeners.end(); ++it) {
-					(*it)(event);
+				for (auto& listener: listeners) {
+					listener(event);
 				}
 			}
 		}
@@ -110,12 +114,10 @@ EventNode::EventNode(std::string address):
 		m_address(address),
 		m_active(true)
 {
-	register_node(this);
 }
 
 
 EventNode::~EventNode() {
-	unregister_node(this);
 }
 
 
@@ -125,7 +127,7 @@ void EventNode::add_listener(std::function<void(const Event&)> listener) {
 
 
 void EventNode::add_listener(std::string id, std::function<void(const Event&)> listener) {
-	m_listener_map[id] = listener;
+	m_listener_map[id].push_back(listener);
 }
 
 
@@ -134,6 +136,6 @@ void EventNode::send_event(
 		std::string sink,
 		EventVariant data
 ) {
-	enqueue_event(Event(id, m_address, sink, data));
+	enqueue_event(id, m_address, sink, data);
 }
 

@@ -9,7 +9,8 @@
 #define STR_IMPL(x) #x
 #define STR(x) STR_IMPL(x)
 #define MAKE_ADDRESS(x) \
-	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address
+	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address; \
+	register_node(this)
 
 
 class Widget: public EventNode {

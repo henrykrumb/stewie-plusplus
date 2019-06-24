@@ -18,7 +18,8 @@ public:
 	Widget(const Widget& widget) = delete;
 	virtual ~Widget() {}
 	
-	virtual int handle_key(const int& c) { return _handle_key(c); }
+	virtual int handle_key(const int& c);
+	
 	virtual void show(Canvas& canvas);
 	virtual void pack() { _pack(); }
 	
@@ -37,6 +38,9 @@ public:
 	bool is_visible() const { return m_visible; }
 	void set_visible(bool visible) { m_visible = visible; }
 	
+	bool is_active() const { return m_active; }
+	void set_active(bool active) { m_active = active; }
+	
 	Box get_box() const { return m_box; }
 	void set_box(Box box);
 	void set_parent(Widget* parent);
@@ -50,4 +54,5 @@ protected:
 	bool m_focusable;
 	bool m_focused;
 	bool m_visible;
+	bool m_active;
 };

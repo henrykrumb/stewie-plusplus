@@ -9,7 +9,7 @@
 #define STR_IMPL(x) #x
 #define STR(x) STR_IMPL(x)
 #define MAKE_ADDRESS(x) \
-	m_address = address.empty() ? #x "::" STR(s_instances) : address
+	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address
 
 
 class Widget: public EventNode {
@@ -21,7 +21,7 @@ public:
 	virtual int handle_key(const int& c);
 	
 	virtual void show(Canvas& canvas);
-	virtual void pack() { _pack(); }
+	virtual void pack();
 	
 	virtual int _handle_key(const int& c) = 0;
 	virtual void _show(Canvas& canvas) = 0;
@@ -38,15 +38,19 @@ public:
 	bool is_visible() const { return m_visible; }
 	void set_visible(bool visible) { m_visible = visible; }
 	
-	bool is_active() const { return m_active; }
-	void set_active(bool active) { m_active = active; }
-	
 	Box get_box() const { return m_box; }
 	void set_box(Box box);
 	void set_parent(Widget* parent);
 
 protected:
+	std::string m_content;
 	Box m_box;
+	
+	/*
+	 * This needs to be a standard C pointer, as we want to pass it "this"
+	 * pointers to parent Widget objects. Creating smart pointer instances
+	 * from "this" pointers is tedious, so we use C pointers in this case.
+	 */
 	Widget* m_parent;
 	
 	static int s_instances;

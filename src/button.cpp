@@ -2,14 +2,14 @@
 #include <sstream>
 
 #include "button.h"
+#include "error.h"
 #include "geometry.h"
 #include "utils.h"
 
 
-Button::Button(std::string label, bool center, std::string address):
+Button::Button(std::string label, std::string address):
 		Widget(address),
-		m_label(label),
-		m_center(center)
+		m_label(label)
 {
 	MAKE_ADDRESS(Button);
 	m_focusable = true;
@@ -38,18 +38,9 @@ void Button::_show(Canvas& canvas) {
 	std::string text = sstr.str();
 	
 	Dimension d = stringsize(text);
-	if (m_center) {
-		canvas.draw_text(
-			text,
-			x + roundi((float) (w - d.w()) / 2.0f),
-			y + roundi((float) (h - d.h()) / 2.0f)
-		);
-	}
-	else {
-		canvas.draw_text(
-			text,
-			x,
-			y + roundi((float) (h - d.h()) / 2.0f)
-		);
-	}
+	canvas.draw_text(
+		text,
+		x + roundi((float) (w - d.w()) / 2.0f),
+		y + roundi((float) (h - d.h()) / 2.0f)
+	);
 }

@@ -47,7 +47,7 @@ int example_1(int argc, char* argv[]) {
 	app->add_listener(
 		[&btn_submit, &form, &evaluation] (const Event& e) {
 			if (e.get_source() == "submit") {
-				btn_submit->send_event(EVENT_NEXT_FRAME, "application");
+				btn_submit->send_event(APP_EVENT_I_NEXT_FRAME, "application");
 				evaluation = form->evaluate();
 			}
 		}

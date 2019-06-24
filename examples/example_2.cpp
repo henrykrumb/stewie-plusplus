@@ -40,10 +40,10 @@ std::shared_ptr<Frame> make_frame_1() {
 	frame->add_listener("activate",
 		[&frame] (const Event& e) {
 			if (e.get_source() == "btn_submit") {
-				frame->send_event(EVENT_NEXT_FRAME, "application");
+				frame->send_event(APP_EVENT_I_NEXT_FRAME, "application");
 			}
 			else if (e.get_source() == "btn_quit1") {
-				frame->send_event(EVENT_QUIT, "application");
+				frame->send_event(APP_EVENT_I_QUIT, "application");
 			}
 		}
 	);
@@ -76,16 +76,16 @@ std::shared_ptr<Frame> make_frame_2(std::shared_ptr<Application> app) {
 	frame->add_listener("activate",
 		[&frame] (const Event& e) {
 			if (e.get_source() == "btn_pointcloud") {
-				frame->send_event(EVENT_NEXT_FRAME, "application");
+				frame->send_event(APP_EVENT_I_NEXT_FRAME, "application");
 			}
 			else if (e.get_source() == "btn_phantom") {
-				frame->send_event(EVENT_NEXT_FRAME, "application");
+				frame->send_event(APP_EVENT_I_NEXT_FRAME, "application");
 			}
 			else if (e.get_source() == "btn_sweep") {
-				frame->send_event(EVENT_NEXT_FRAME, "application");
+				frame->send_event(APP_EVENT_I_NEXT_FRAME, "application");
 			}
 			else if (e.get_source() == "btn_quit2") {
-				frame->send_event(EVENT_QUIT, "application");
+				frame->send_event(APP_EVENT_I_QUIT, "application");
 			}
 		}
 	);

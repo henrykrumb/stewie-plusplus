@@ -6,7 +6,16 @@
 #include <variant>
 
 
-typedef std::variant<int, float, long, std::string> EventVariant;
+typedef std::variant<
+	int,
+	float,
+	long,
+	std::string,
+	std::vector<int>,
+	std::vector<float>,
+	std::vector<long>,
+	std::vector<std::string>
+> EventVariant;
 
 class EventNode;
 

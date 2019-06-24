@@ -20,10 +20,11 @@
 #include "widget.h" // for MAKE_ADDRESS macro
 
 
-#define EVENT_NEXT_FRAME "next frame"
-#define EVENT_PREVIOUS_FRAME "previous frame"
-#define EVENT_SWITCH_FRAME "switch frame"
-#define EVENT_QUIT "quit"
+#define APP_EVENT_O_RESIZE "resize"
+#define APP_EVENT_I_NEXT_FRAME "next frame"
+#define APP_EVENT_I_PREVIOUS_FRAME "previous frame"
+#define APP_EVENT_I_SWITCH_FRAME "switch frame"
+#define APP_EVENT_I_QUIT "quit"
 
 /**
  * Application status codes; those are returned by the

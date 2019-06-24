@@ -76,15 +76,15 @@ void Application::p_switch_frame(std::vector<std::shared_ptr<Frame>>::iterator i
 
 
 void Application::handle_event(const Event& event) {
-	if (event.get_id() == EVENT_NEXT_FRAME) {
+	if (event.get_id() == APP_EVENT_I_NEXT_FRAME) {
 		p_switch_frame(m_frame_iter + 1);
 	}
-	else if (event.get_id() == EVENT_PREVIOUS_FRAME) {
+	else if (event.get_id() == APP_EVENT_I_PREVIOUS_FRAME) {
 		if (m_frame_iter != m_frames.begin()) {
 			p_switch_frame(m_frame_iter - 1);
 		}
 	}
-	else if (event.get_id() == EVENT_SWITCH_FRAME) {
+	else if (event.get_id() == APP_EVENT_I_SWITCH_FRAME) {
 		try {
 			auto frame = std::get<std::string>(event.get_data());
 			for (auto it = m_frames.begin(); it != m_frames.end(); ++it) {
@@ -97,7 +97,7 @@ void Application::handle_event(const Event& event) {
 			
 		}
 	}
-	else if (event.get_id() == EVENT_QUIT) {
+	else if (event.get_id() == APP_EVENT_I_QUIT) {
 		m_quit = true;
 		m_status = APP_STATUS_EVENT_QUIT;
 	}
@@ -155,6 +155,7 @@ int Application::run() {
 			case KEY_RESIZE:
 				frame->set_box(Box(0, 0, COLS, LINES - 1));
 				frame->pack();
+				send_event(APP_EVENT_O_RESIZE, "", std::vector<int> {COLS, LINES});
 				break;
 			default:
 				if (c >= 0) {

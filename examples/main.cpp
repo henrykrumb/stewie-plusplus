@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "example_1.h"
+#include "example_2.h"
 
 
 void usage(char* argv0) {
@@ -9,6 +10,7 @@ void usage(char* argv0) {
 	std::cout << std::endl;
 	std::cout << "EXAMPLEs are:" << std::endl;
 	std::cout << "1" << std::endl;
+	std::cout << "2" << std::endl;
 }
 
 
@@ -24,6 +26,9 @@ int main(int argc, char* argv[]) {
 	
 	if (example == "1") {
 		status = example_1(argc, argv);
+	}
+	else if (example == "2") {
+		status = example_2(argc, argv);
 	}
 	else {
 		std::cout << "example '" << example << "' not available" << std::endl;

@@ -9,6 +9,8 @@ public:
 	Label(const Label&) = delete;
 	virtual ~Label() {}
 	
+	virtual void handle_event(const Event& event);
+	
 	virtual int _handle_key(const int& c);
 	virtual void _show(Canvas& canvas);
 

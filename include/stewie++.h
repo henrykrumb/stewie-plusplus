@@ -11,6 +11,7 @@
 #include "frame.h"
 #include "geometry.h"
 #include "hbox.h"
+#include "label.h"
 #include "optionbox.h"
 #include "progressbar.h"
 #include "radiobutton.h"

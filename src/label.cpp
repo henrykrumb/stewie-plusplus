@@ -12,8 +12,12 @@ Label::Label(std::string label, std::string address):
 }
 
 
+void Label::handle_event(const Event& event) {
+	
+}
+
+
 void Label::_show(Canvas& canvas) {
-	canvas.draw_frame(m_box);
 	int x = m_box.x(), y = m_box.y(), w = m_box.w(), h = m_box.h();
 	
 	Dimension d = stringsize(m_label);

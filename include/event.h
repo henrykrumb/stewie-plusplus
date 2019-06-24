@@ -37,7 +37,7 @@ protected:
 
 
 void enqueue_event(Event event);
-void enqueue_event(std::string id, std::string sink="", EventVariant data="");
+void enqueue_event(std::string id, std::string source="", std::string sink="", EventVariant data="");
 void dispatch_events();
 
 
@@ -51,13 +51,20 @@ public:
 		return m_address;
 	}
 	
+	void set_active(bool active) {
+		m_active = active;
+	}
+	
 	void add_listener(std::function<void(const Event&)> listener);
+	void add_listener(std::string id, std::function<void(const Event&)> listener);
 	void send_event(std::string id, std::string sink="", EventVariant data="");
 	virtual void handle_event(const Event& event) = 0;
 	
 	friend void dispatch_events();
 
 protected:
+	bool m_active;
 	std::string m_address;
 	std::vector<std::function<void(const Event&)>> m_listeners;
+	std::map<std::string, std::function<void(const Event&)>> m_listener_map;
 };

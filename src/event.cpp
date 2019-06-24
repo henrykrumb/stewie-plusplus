@@ -50,7 +50,15 @@ void dispatch_events() {
 		/* no sink provided (broadcast) */
 		if (sink.empty()) {
 			for (auto it = event_nodes.begin(); it != event_nodes.end(); ++it) {
+				if (!it->second->m_active) {
+					continue;
+				}
 				it->second->handle_event(event);
+				auto listener_map = it->second->m_listener_map;
+				try {
+					auto listener = listener_map.at(event.get_id());
+					listener(event);
+				} catch (std::exception& e) {}
 				auto listeners = it->second->m_listeners;
 				for (auto jt = listeners.begin(); jt != listeners.end(); ++jt) {
 					(*jt)(event);
@@ -58,11 +66,19 @@ void dispatch_events() {
 			}
 		}
 		else {
+			// TODO handle exception :)
 			EventNode* node = event_nodes.at(sink);
-			node->handle_event(event);
-			auto listeners = node->m_listeners;
-			for (auto it = listeners.begin(); it != listeners.end(); ++it) {
-				(*it)(event);
+			if (node->m_active) {
+				node->handle_event(event);
+				auto listener_map = node->m_listener_map;
+				try {
+					auto listener = listener_map.at(event.get_id());
+					listener(event);
+				} catch (std::exception& e) {}
+				auto listeners = node->m_listeners;
+				for (auto it = listeners.begin(); it != listeners.end(); ++it) {
+					(*it)(event);
+				}
 			}
 		}
 	}
@@ -91,7 +107,8 @@ Event::Event(const Event& event):
 
 
 EventNode::EventNode(std::string address):
-		m_address(address)
+		m_address(address),
+		m_active(true)
 {
 	register_node(this);
 }
@@ -104,6 +121,11 @@ EventNode::~EventNode() {
 
 void EventNode::add_listener(std::function<void(const Event&)> listener) {
 	m_listeners.push_back(listener);
+}
+
+
+void EventNode::add_listener(std::string id, std::function<void(const Event&)> listener) {
+	m_listener_map[id] = listener;
 }
 
 

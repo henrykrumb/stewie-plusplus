@@ -37,7 +37,7 @@ int example_1(int argc, char* argv[]) {
 	ADD_CHILD(form, prg_1);
 	
 	/* submit */
-	auto btn_submit = std::make_shared<Button>("submit", true, "submit");
+	auto btn_submit = std::make_shared<Button>("submit", "submit");
 	ADD_CHILD(form, btn_submit);
 	
 	ADD_CHILD(frame, form);

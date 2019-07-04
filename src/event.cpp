@@ -31,7 +31,7 @@ void enqueue_event(
 		std::string id,
 		std::string source,
 		std::string sink,
-		EventVariant data
+		EventData data
 ) {
 	event_queue.push(Event(id, source, sink, data));
 }
@@ -50,7 +50,7 @@ void dispatch_events() {
 		/* no sink provided (broadcast) */
 		if (sink.empty()) {
 			for (auto it = event_nodes.begin(); it != event_nodes.end(); ++it) {
-				if (not it->second->m_active) {
+				if (!it->second->m_active) {
 					continue;
 				}
 				it->second->handle_event(event);
@@ -93,7 +93,7 @@ Event::Event(
 	std::string id,
 	std::string source,
 	std::string sink,
-	EventVariant data):
+	EventData data):
 		m_id(id),
 		m_source(source),
 		m_sink(sink),
@@ -105,7 +105,8 @@ Event::Event(
 Event::Event(const Event& event):
 		m_id(event.m_id),
 		m_source(event.m_source),
-		m_sink(event.m_sink)
+		m_sink(event.m_sink),
+		m_data(event.m_data)
 {
 }
 
@@ -134,7 +135,7 @@ void EventNode::add_listener(std::string id, std::function<void(const Event&)> l
 void EventNode::send_event(
 		std::string id,
 		std::string sink,
-		EventVariant data
+		EventData data
 ) {
 	enqueue_event(id, m_address, sink, data);
 }

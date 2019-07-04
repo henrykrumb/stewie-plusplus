@@ -1,6 +1,7 @@
 #include <cmath>
 #include <sstream>
 
+#include "error.h"
 #include "progressbar.h"
 #include "utils.h"
 
@@ -34,9 +35,9 @@ void ProgressBar::set_progress(const float& progress) {
 void ProgressBar::handle_event(const Event& event) {
 	if (event.get_id() == EVENT_SET_PROGRESS) {
 		try {
-			set_progress(std::get<float>(event.get_data()));
-		} catch (const std::bad_variant_access& bva) {
-			
+			set_progress(std::any_cast<float>(event.get_data()));
+		} catch (const std::bad_any_cast& bac) {
+			fatal("tried to set ProgressBar value with wrong datatype");
 		}
 	}
 	else {

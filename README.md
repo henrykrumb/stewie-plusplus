@@ -10,6 +10,10 @@
 
 ## Philosophy ##
 
+### Simplicity ###
+Allow short cuts for common use cases but keep not-so-common use cases
+feasible.
+
 ### Portability ###
 stewie++ should be portable in a way that it could run on a Windows terminal
 using pcurses; that is a major restriction. Unicode characters should be
@@ -35,4 +39,3 @@ used in scenarios where smart pointers cannot be used without major effort,
 e.g. when you need to store the "this" pointer of some class.
 If you should happen to use C style pointers, make sure you have full control
 of when it is created, shared and finally destroyed.
-

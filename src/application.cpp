@@ -1,6 +1,7 @@
 #include <curses.h>
 
 #include <iostream>
+#include <sstream>
 
 #include "application.h"
 #include "canvas.h"
@@ -86,15 +87,17 @@ void Application::handle_event(const Event& event) {
 	}
 	else if (event.get_id() == APP_EVENT_I_SWITCH_FRAME) {
 		try {
-			auto frame = std::get<std::string>(event.get_data());
+			auto frame = std::any_cast<const char*>(event.get_data());
 			for (auto it = m_frames.begin(); it != m_frames.end(); ++it) {
 				if ((*it)->get_address() == frame) {
 					p_switch_frame(it);
 					break;
 				}
 			}
-		} catch (const std::bad_variant_access& a) {
-			
+		} catch (const std::bad_any_cast& bac) {
+			if (!event.get_data().has_value()) {
+				fatal("event data empty");
+			}
 		}
 	}
 	else if (event.get_id() == APP_EVENT_I_QUIT) {

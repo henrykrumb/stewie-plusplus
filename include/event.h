@@ -1,4 +1,5 @@
 #pragma once
+#include <any>
 #include <functional>
 #include <map>
 #include <memory>
@@ -6,16 +7,24 @@
 #include <variant>
 
 
-typedef std::variant<
+/*
+ * This type is used for event payloads. What we encode here should cover most
+ * of the use cases. If it should not fit your use case, you may serialize
+ * your object(s) to strings.
+ */
+/*typedef std::variant<
+	bool,
 	int,
 	float,
 	long,
 	std::string,
+	std::vector<bool>,
 	std::vector<int>,
 	std::vector<float>,
 	std::vector<long>,
 	std::vector<std::string>
-> EventVariant;
+> EventVariant;*/
+typedef std::any EventData;
 
 class EventNode;
 
@@ -25,10 +34,10 @@ void unregister_node(EventNode* node);
 class Event {
 public:
 	Event(
-			std::string id,
-			std::string source,
-			std::string sink="",
-			EventVariant data=""
+		std::string id,
+		std::string source,
+		std::string sink="",
+		EventData data=""
 	);
 	Event(const Event& event);
 	virtual ~Event() {}
@@ -36,18 +45,18 @@ public:
 	std::string get_id() const { return m_id; }
 	std::string get_source() const { return m_source; }
 	std::string get_sink() const { return m_sink; }
-	EventVariant get_data() const { return m_data; }
+	EventData get_data() const { return m_data; }
 
 protected:
 	std::string m_id;
 	std::string m_source;
 	std::string m_sink;
-	EventVariant m_data;
+	EventData m_data;
 };
 
 
 void enqueue_event(Event event);
-void enqueue_event(std::string id, std::string source="", std::string sink="", EventVariant data="");
+void enqueue_event(std::string id, std::string source="", std::string sink="", EventData data="");
 void dispatch_events();
 
 
@@ -67,7 +76,7 @@ public:
 	
 	void add_listener(std::function<void(const Event&)> listener);
 	void add_listener(std::string id, std::function<void(const Event&)> listener);
-	void send_event(std::string id, std::string sink="", EventVariant data="");
+	void send_event(std::string id, std::string sink="", EventData data="");
 	virtual void handle_event(const Event& event) = 0;
 	
 	friend void dispatch_events();

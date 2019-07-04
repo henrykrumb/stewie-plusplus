@@ -3,6 +3,8 @@
 #include "widget.h"
 
 
+#define BUTTON_EVENT_O_ACTIVATE "activate"
+
 class Button: public Widget {
 public:
 	Button(std::string label, std::string address="");

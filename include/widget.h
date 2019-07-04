@@ -60,4 +60,5 @@ protected:
 	bool m_focused;
 	bool m_visible;
 	bool m_active;
+	bool m_enabled;
 };

@@ -50,7 +50,7 @@ int OptionBox::_handle_key(const int& c) {
 			}
 			return 0;
 		case ' ':
-			send_event(EVENT_OPTIONBOX_ACTIVATE, "", EventVariant(*m_option_iter));
+			send_event(EVENT_OPTIONBOX_ACTIVATE, "", *m_option_iter);
 			return 0;
 		default: return c;
 	}

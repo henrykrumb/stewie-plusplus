@@ -3,6 +3,9 @@
 #include "widget.h"
 
 
+#define LABEL_EVENT_I_SET_TEXT "set text"
+
+
 class Label: public Widget {
 public:
 	Label(std::string label, std::string address="");

@@ -87,7 +87,7 @@ void Application::handle_event(const Event& event) {
 	}
 	else if (event.get_id() == APP_EVENT_I_SWITCH_FRAME) {
 		try {
-			auto frame = std::any_cast<const char*>(event.get_data());
+			auto frame = event.get_data_as_string();
 			for (auto it = m_frames.begin(); it != m_frames.end(); ++it) {
 				if ((*it)->get_address() == frame) {
 					p_switch_frame(it);

@@ -41,6 +41,7 @@ public:
 	std::string get_source() const { return m_source; }
 	std::string get_sink() const { return m_sink; }
 	EventData get_data() const { return m_data; }
+	std::string get_data_as_string() const;
 
 protected:
 	std::string m_id;

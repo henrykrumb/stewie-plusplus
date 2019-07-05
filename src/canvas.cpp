@@ -23,6 +23,8 @@ void Canvas::draw_text(std::string str, int x, int y) {
 void Canvas::draw_frame(Box box, bool thick) {
 	int x = box.x(), y = box.y(), w = box.w(), h = box.h();
 	
+	color_set(1, nullptr);
+	
 	for (int fy = 1; fy < h; fy++) {
 		draw_char('|', x, fy + y);
 		draw_char('|', x + w - 1, fy + y);
@@ -30,18 +32,30 @@ void Canvas::draw_frame(Box box, bool thick) {
 	
 	for (int fx = 1; fx < w - 1; fx++) {
 		draw_char('-', fx + x, y);
-		draw_char('-', fx + x, y + h);
+		draw_char('-', fx + x, y + h - 1);
 	}
 	
 	draw_char('+', x, y);
 	draw_char('+', x + w - 1, y);
-	draw_char('+', x + w - 1, y + h);
-	draw_char('+', x, y + h);
+	draw_char('+', x + w - 1, y + h - 1);
+	draw_char('+', x, y + h - 1);
+	
+	color_set(0, nullptr);
 }
 
 
 void Canvas::draw_box(Box box, char character) {
+	int x = box.x(), y = box.y(), w = box.w(), h = box.h();
 	
+	color_set(1, nullptr);
+	
+	for (int fy = 0; fy < h; fy++) {
+		for (int fx = 0; fx < w; fx++) {
+			draw_char(' ', fx + x, fy + y);
+		}
+	}
+	
+	color_set(0, nullptr);
 }
 
 

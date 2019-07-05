@@ -5,12 +5,7 @@
 #include "canvas.h"
 #include "event.h"
 #include "geometry.h"
-
-#define STR_IMPL(x) #x
-#define STR(x) STR_IMPL(x)
-#define MAKE_ADDRESS(x) \
-	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address; \
-	register_node(this)
+#include "utils.h"
 
 
 class Widget: public EventNode {
@@ -53,8 +48,6 @@ protected:
 	 * from "this" pointers is tedious, so we use C pointers in this case.
 	 */
 	Widget* m_parent;
-	
-	static int s_instances;
 	
 	bool m_focusable;
 	bool m_focused;

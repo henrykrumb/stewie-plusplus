@@ -8,22 +8,17 @@
 
 
 /*
- * This type is used for event payloads. What we encode here should cover most
- * of the use cases. If it should not fit your use case, you may serialize
- * your object(s) to strings.
+ * Macro to generate default EventNode addresses.
+ * Use this in subclass constructors to obtain concise
+ * address strings (e.g. ProgressBar::12).
  */
-/*typedef std::variant<
-	bool,
-	int,
-	float,
-	long,
-	std::string,
-	std::vector<bool>,
-	std::vector<int>,
-	std::vector<float>,
-	std::vector<long>,
-	std::vector<std::string>
-> EventVariant;*/
+#define STR_IMPL(x) #x
+#define STR(x) STR_IMPL(x)
+#define MAKE_ADDRESS(x) \
+	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address; \
+	register_node(this)
+
+
 typedef std::any EventData;
 
 class EventNode;
@@ -82,6 +77,8 @@ public:
 	friend void dispatch_events();
 
 protected:
+	static int s_instances;
+	
 	bool m_active;
 	std::string m_address;
 	std::vector<std::function<void(const Event&)>> m_listeners;

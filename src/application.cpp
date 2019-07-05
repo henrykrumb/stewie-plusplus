@@ -136,6 +136,8 @@ int Application::run() {
 	curs_set(0);
 	keypad(stdscr, 1);
 	timeout(0);
+	start_color();
+	init_pair(1, COLOR_BLACK, COLOR_WHITE);
 	
 	std::atexit(s_exit);
 	

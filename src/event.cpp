@@ -5,6 +5,9 @@
 #include "event.h"
 
 
+int EventNode::s_instances = 0;
+
+
 static std::queue<Event> event_queue;
 static std::map<std::string, EventNode*> event_nodes;
 

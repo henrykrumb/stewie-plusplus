@@ -4,9 +4,6 @@
 #include "widget.h"
 
 
-int Widget::s_instances = 0;
-
-
 Widget::Widget(std::string address):
 		EventNode(address),
 		m_box(0, 0, 0, 0),
@@ -36,7 +33,7 @@ void Widget::set_parent(Widget* parent) {
 void Widget::show(Canvas& canvas) {
 	if (m_visible) {
 		if (m_focused) {
-			canvas.draw_frame(m_box);
+			canvas.draw_box(m_box);
 		}
 		_show(canvas);
 	}

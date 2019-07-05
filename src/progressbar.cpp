@@ -10,7 +10,8 @@
 ProgressBar::ProgressBar(std::string label, std::string address):
 		Widget(address),
 		Evaluatable(label),
-		m_label(label)
+		m_label(label),
+		m_progress(0.0f)
 {
 	MAKE_ADDRESS(ProgressBar);
 	if (m_name.empty()) {

@@ -25,20 +25,20 @@ Job::~Job() {
 
 void Job::handle_event(const Event& event) {
 	if (event.get_id() == JOB_EVENT_I_START) {
-		this->start();
+		start();
 	}
 	else if (event.get_id() == JOB_EVENT_I_RESTART) {
-		this->restart();
+		restart();
 	}
 	else if (event.get_id() == JOB_EVENT_I_KILL) {
-		this->kill();
+		kill();
 	}
 	else if (event.get_id() == JOB_EVENT_I_JOIN) {
 		if (m_status == JOB_STATUS_NONE) {
-			if (this->m_thread) {
-				this->m_thread->join();
+			if (m_thread) {
+				m_thread->join();
 			}
-			this->m_thread = nullptr;
+			m_thread = nullptr;
 		}
 	}
 }
@@ -92,7 +92,14 @@ JobStatus Job::get_status() const {
 }
 
 
+/*
+ * This method is intended to be called from within the Job function
+ * to update the associated ProgressBar's value.
+ */
 void Job::set_progress(float progress) {
+	if (!m_progressbar) {
+		return;
+	}
 	if (progress < 0.0f || progress > 1.0f) {
 		throw std::invalid_argument("invalid progress value");
 	}
@@ -100,6 +107,11 @@ void Job::set_progress(float progress) {
 }
 
 
+/*
+ * This method should be called from within every Job function to query
+ * whether the Job is still running. This way we can control Job
+ * functions which enables us to kill Jobs from other threads.
+ */
 bool Job::is_running() {
 	return m_running;
 }

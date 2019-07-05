@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iomanip>
 #include <sstream>
 
 #include "error.h"
@@ -58,12 +59,12 @@ void ProgressBar::_show(Canvas& canvas) {
 	
 	sstr << "[";
 	for (int i = 0; i < w_full; i++) {
-		sstr << "#";
+		sstr << "=";
 	}
 	for (int i = 0; i < w_empty; i++) {
 		sstr << " ";
 	}
-	sstr << "] " << percentage << "%";
+	sstr << "] " << std::setw(3) << percentage << "%";
 	std::string text = sstr.str();
 	
 	Dimension d = stringsize(text);

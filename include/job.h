@@ -30,7 +30,11 @@ typedef std::function<void(Job& j)> JobFunction;
 
 class Job: public EventNode {
 public:
-	Job(JobFunction run, std::shared_ptr<ProgressBar> progressbar, std::string address="");
+	Job(
+		JobFunction run,
+		std::shared_ptr<ProgressBar> progressbar=nullptr,
+		std::string address=""
+	);
 	Job(const Job& job) = delete;
 	virtual ~Job();
 	

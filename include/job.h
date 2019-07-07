@@ -16,6 +16,11 @@
 #define JOB_EVENT_I_KILL "kill"
 
 
+#define MAKE_JOB(NAME, FUNCTION, PROGRESS) \
+	auto NAME = Job(FUNCTION, PROGRESS, #NAME); \
+	register_node(NAME);
+
+
 enum JobStatus {
 	JOB_STATUS_NONE,
 	JOB_STATUS_RUNNING,

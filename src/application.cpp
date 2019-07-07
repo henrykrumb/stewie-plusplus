@@ -57,6 +57,7 @@ Application::Application(std::string address):
  */
 void Application::add_frame(std::shared_ptr<Frame> frame) {
 	frame->set_active(false);
+	register_node(frame);
 	m_frames.push_back(frame);
 }
 

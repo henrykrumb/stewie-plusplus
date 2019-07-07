@@ -25,6 +25,8 @@ void my_job(Job& j, long iterations) {
 
 int example_jobs(int argc, char* argv[]) {
 	auto app = std::make_shared<Application>("application");
+	register_node(app);
+	
 	auto frame = std::make_shared<Frame>("frame");
 	
 	auto vbox = std::make_shared<VBox>();
@@ -42,16 +44,17 @@ int example_jobs(int argc, char* argv[]) {
 	ADD_CHILD(vbox, btn_quit);
 	ADD_CHILD(frame, vbox);
 	
-	Job job(
+	auto job = std::make_shared<Job>(
 		std::bind(my_job, std::placeholders::_1, 100000000),
 		prg_job,
 		"my_job"
 	);
+	register_node(job);
 	
 	frame->add_listener("activate",
 		[&frame, &job] (const Event& e) {
 			if (e.get_source() == "btn_start") {
-				if (job.get_status() == JOB_STATUS_NONE) {
+				if (job->get_status() == JOB_STATUS_NONE) {
 					frame->send_event(JOB_EVENT_I_START, "my_job");
 				}
 			}

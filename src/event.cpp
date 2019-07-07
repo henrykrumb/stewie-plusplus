@@ -9,18 +9,18 @@ int EventNode::s_instances = 0;
 
 
 static std::queue<Event> event_queue;
-static std::map<std::string, EventNode*> event_nodes;
+static std::map<std::string, std::shared_ptr<EventNode>> event_nodes;
 
 
-void register_node(EventNode* node) {
+void register_node(std::shared_ptr<EventNode> node) {
 	event_nodes.insert(
-		std::pair<std::string, EventNode*>(
+		std::pair<std::string, std::shared_ptr<EventNode>>(
 			node->get_address(), node
 	));
 }
 
 
-void unregister_node(EventNode* node) {
+void unregister_node(std::shared_ptr<EventNode> node) {
 	event_nodes.erase(node->get_address());
 }
 
@@ -80,7 +80,7 @@ void dispatch_events() {
 		/* sink provided (directed event) */
 		else {
 			try {
-				EventNode* node = event_nodes.at(sink);
+				auto node = event_nodes.at(sink);
 				if (node->m_active) {
 					// handle_event function
 					node->handle_event(event);

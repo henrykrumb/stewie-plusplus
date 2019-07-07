@@ -50,8 +50,8 @@ bool Container::add_child(std::shared_ptr<Widget> widget) {
 	if (_add_child(widget)) {
 		widget->set_parent(this);
 		m_children.push_back(widget);
+		register_node(widget);
 		pack();
-		
 		return true;
 	}
 	

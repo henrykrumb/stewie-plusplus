@@ -15,16 +15,15 @@
 #define STR_IMPL(x) #x
 #define STR(x) STR_IMPL(x)
 #define MAKE_ADDRESS(x) \
-	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address; \
-	register_node(this)
+	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address
 
 
 typedef std::any EventData;
 
 class EventNode;
 
-void register_node(EventNode* node);
-void unregister_node(EventNode* node);
+void register_node(std::shared_ptr<EventNode> node);
+void unregister_node(std::shared_ptr<EventNode> node);
 
 class Event {
 public:

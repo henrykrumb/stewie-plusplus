@@ -12,5 +12,6 @@ void fatal(std::string message) {
 	
 	std::cout << "[fatal] " << message << std::endl;
 	
-	exit(EXIT_FAILURE);
+	std::terminate();
+	std::exit(EXIT_FAILURE);
 }

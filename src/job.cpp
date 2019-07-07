@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "job.h"
 
 
@@ -13,7 +15,6 @@ Job::Job(
 	m_progressbar(progressbar)
 {
 	MAKE_ADDRESS(Job);
-	
 	m_thread = nullptr;
 }
 
@@ -58,6 +59,7 @@ void Job::start() {
 				}
 				
 				this->send_event(JOB_EVENT_I_JOIN, m_address);
+				this->send_event(JOB_EVENT_O_FINISH);
 			});
 			break;
 		case JOB_STATUS_RUNNING:

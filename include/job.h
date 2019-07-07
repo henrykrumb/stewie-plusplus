@@ -8,8 +8,6 @@
 
 
 #define JOB_EVENT_O_FINISH "finish"
-#define JOB_EVENT_O_TERMINATE "terminate"
-#define JOB_EVENT_O_ERROR "error"
 
 #define JOB_EVENT_I_START "start"
 #define JOB_EVENT_I_RESTART "restart"

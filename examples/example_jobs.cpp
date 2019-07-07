@@ -10,15 +10,14 @@
 	auto NAME = std::make_shared<Button>(LABEL, #NAME);
 
 
-void my_job(Job& j) {
-	long N = 1000000000;
+void my_job(Job& j, long iterations) {
 	j.set_progress(0.0f);
 	
-	for (long i = 0; i < N; ++i) {
+	for (long i = 0; i < iterations; ++i) {
 		if (!j.is_running()) {
 			break;
 		}
-		float progress = (float) i / (float) N;
+		float progress = (float) i / (float) iterations;
 		j.set_progress(progress);
 	}
 }
@@ -43,7 +42,11 @@ int example_jobs(int argc, char* argv[]) {
 	ADD_CHILD(vbox, btn_quit);
 	ADD_CHILD(frame, vbox);
 	
-	Job job(std::bind(my_job, std::placeholders::_1), prg_job, "my_job");
+	Job job(
+		std::bind(my_job, std::placeholders::_1, 100000000),
+		prg_job,
+		"my_job"
+	);
 	
 	frame->add_listener("activate",
 		[&frame, &job] (const Event& e) {

@@ -20,7 +20,10 @@
 #include "widget.h" // for MAKE_ADDRESS macro
 
 
+#define APP_EVENT_O_LOAD_FRAME "load frame"
+#define APP_EVENT_O_UNLOAD_FRAME "unload frame"
 #define APP_EVENT_O_RESIZE "resize"
+
 #define APP_EVENT_I_NEXT_FRAME "next frame"
 #define APP_EVENT_I_PREVIOUS_FRAME "previous frame"
 #define APP_EVENT_I_SWITCH_FRAME "switch frame"

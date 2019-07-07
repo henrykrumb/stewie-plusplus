@@ -68,6 +68,8 @@ void Application::p_switch_frame(std::vector<std::shared_ptr<Frame>>::iterator i
 		m_status = APP_STATUS_LAST_FRAME;
 		return;
 	}
+	send_event(APP_EVENT_O_UNLOAD_FRAME, "", (*m_frame_iter)->get_address());
+	send_event(APP_EVENT_O_LOAD_FRAME, "", (*it)->get_address());
 	m_frame_iter = it;
 	auto frame = *m_frame_iter;
 	frame->set_active(true);
@@ -147,23 +149,21 @@ int Application::run() {
 	
 	while (!m_quit) {
 		int c = getch();
+		std::string s(keyname(c));
 		auto frame = *(m_frame_iter);
 		
 		switch (c) {
-			// FIXME maybe widgets want to use the 'q' key as well.
-			// possible solution: process 'q' key in Frame objects instead.
-			// child widgets can override the 'q' key.
-			case 'q':
-				m_quit = true;
-				m_status = APP_STATUS_USER_QUIT;
-				break;
 			case KEY_RESIZE:
 				frame->set_box(Box(0, 0, COLS, LINES - 1));
 				frame->pack();
 				send_event(APP_EVENT_O_RESIZE, "", std::vector<int> {COLS, LINES});
 				break;
 			default:
-				if (c >= 0) {
+				if (s == "^[" || s == "^W") {
+					m_quit = true;
+					m_status = APP_STATUS_USER_QUIT;
+				}
+				else if (c >= 0) {
 					frame->handle_key(c);
 				}
 				break;

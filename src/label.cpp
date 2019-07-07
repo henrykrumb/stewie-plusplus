@@ -13,7 +13,9 @@ Label::Label(std::string label, std::string address):
 
 
 void Label::handle_event(const Event& event) {
-	
+	if (event.get_id() == LABEL_EVENT_I_SET_TEXT) {
+		m_label = event.get_data_as_string();
+	}
 }
 
 

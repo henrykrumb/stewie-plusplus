@@ -18,5 +18,4 @@
 #include "radiobutton.h"
 #include "utils.h"
 #include "widget.h"
-#include "widgettree.h"
 #include "vbox.h"

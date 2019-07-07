@@ -2,35 +2,34 @@
 
 #include "../include/stewie++.h"
 
-#include "example_1.h"
+#include "example_forms.h"
 
 
-int example_1(int argc, char* argv[]) {
+int example_forms(int argc, char* argv[]) {
 	auto app = std::make_shared<Application>("application");
 	
 	auto frame = std::make_shared<Frame>();
 	auto form = std::make_shared<VBox>();
 	
-	auto box_ac = std::make_shared<HBox>();
-	/* filter AC wide */
-	auto rdb_filter_ac_wide = std::make_shared<RadioButton>("ac wide");
-	ADD_CHILD(box_ac, rdb_filter_ac_wide);
+	auto box_food = std::make_shared<HBox>();
+	auto lbl_food = std::make_shared<Label>("choose a food item:");
+	auto rdb_pizza = std::make_shared<RadioButton>("pizza");
+	auto rdb_noodles = std::make_shared<RadioButton>("noodles");
+	ADD_CHILD(box_food, lbl_food);
+	ADD_CHILD(box_food, rdb_pizza);
+	ADD_CHILD(box_food, rdb_noodles);
 	
-	/* filter AC narrow */
-	auto rdb_filter_ac_narrow = std::make_shared<RadioButton>("ac narrow");
-	ADD_CHILD(box_ac, rdb_filter_ac_narrow);
+	rdb_pizza->select();
 	
-	rdb_filter_ac_wide->select();
-	
-	ADD_CHILD(form, box_ac);
+	ADD_CHILD(form, box_food);
 	
 	/* filter DC */
-	auto chk_filter_dc = std::make_shared<CheckBox>("dc");
-	ADD_CHILD(form, chk_filter_dc);
+	auto chk_cheese = std::make_shared<CheckBox>("add cheese");
+	ADD_CHILD(form, chk_cheese);
 	
-	std::vector<std::string> options { "20", "60", "80", "120", "200" };
-	auto opt_frequency = std::make_shared<OptionBox>("freq", options);
-	ADD_CHILD(form, opt_frequency);
+	std::vector<std::string> options { "no sauce", "corn", "onions", "eggplant" };
+	auto opt_topping = std::make_shared<OptionBox>("topping:", options);
+	ADD_CHILD(form, opt_topping);
 	
 	auto prg_1 = std::make_shared<ProgressBar>("progress", "progress");
 	prg_1->set_progress(0.5f);
@@ -58,15 +57,15 @@ int example_1(int argc, char* argv[]) {
 	for (auto it = evaluation.begin(); it != evaluation.end(); ++it) {
 		try {
 			bool bvalue = std::get<bool>(it->second);
-			std::cout << it->first << ":\t" << bvalue << std::endl;
+			std::cout << it->first << "\t" << bvalue << std::endl;
 		}
 		catch (const std::bad_variant_access& bva) {
 			try {
 				std::string svalue = std::get<std::string>(it->second);
-				std::cout << it->first << ":\t" << svalue << std::endl;
+				std::cout << it->first << "\t" << svalue << std::endl;
 			} catch (const std::bad_variant_access& bva2) {
 				float fvalue = std::get<float>(it->second);
-				std::cout << it->first << ":\t" << fvalue << std::endl;
+				std::cout << it->first << "\t" << fvalue << std::endl;
 			}
 		}
 	}

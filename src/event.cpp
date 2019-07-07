@@ -114,10 +114,30 @@ Event::Event(const Event& event):
 }
 
 
+std::string Event::get_data_as_string() const {
+	std::string s;
+	
+	try {
+		s = std::any_cast<std::string>(m_data);
+	} catch (const std::bad_any_cast& bac1) {
+		try {
+			s = std::string(
+				std::any_cast<const char*>(m_data)
+			);
+		} catch (const std::bad_any_cast& bac2) {
+			fatal("failed to convert event data to string");
+		}
+	}
+	
+	return s;
+}
+
+
 EventNode::EventNode(std::string address):
 		m_address(address),
 		m_active(true)
 {
+	++s_instances;
 }
 
 

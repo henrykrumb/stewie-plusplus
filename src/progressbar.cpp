@@ -3,8 +3,9 @@
 #include <sstream>
 
 #include "error.h"
-#include "progressbar.h"
 #include "utils.h"
+
+#include "widgets/progressbar.h"
 
 
 ProgressBar::ProgressBar(std::string label, std::string address):

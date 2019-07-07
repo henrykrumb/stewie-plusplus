@@ -5,7 +5,9 @@
 #include "evaluatable.h"
 #include "event.h"
 #include "geometry.h"
-#include "widget.h"
+
+#include "widgets/widget.h"
+
 
 /* simplify adding shared_ptr|s of Widgets to a Container */
 #define ADD_CHILD(parent, child) \

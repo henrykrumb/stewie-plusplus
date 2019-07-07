@@ -1,7 +1,9 @@
 #pragma once
-#include "container.h"
 #include "evaluatable.h"
-#include "widget.h"
+
+#include "containers/container.h"
+
+#include "widgets/widget.h"
 
 
 class RadioButton: public Widget, public Evaluatable {

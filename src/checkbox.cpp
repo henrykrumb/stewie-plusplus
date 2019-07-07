@@ -2,9 +2,10 @@
 #include <cstdlib>
 #include <sstream>
 
-#include "checkbox.h"
 #include "error.h"
 #include "utils.h"
+
+#include "widgets/checkbox.h"
 
 
 CheckBox::CheckBox(

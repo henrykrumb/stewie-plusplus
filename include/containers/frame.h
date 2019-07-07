@@ -3,9 +3,10 @@
 #include <string>
 
 #include "canvas.h"
-#include "container.h"
 #include "event.h"
 #include "geometry.h"
+
+#include "containers/container.h"
 
 
 class Frame: public Container {

@@ -2,8 +2,9 @@
 #include <sstream>
 
 #include "error.h"
-#include "optionbox.h"
 #include "utils.h"
+
+#include "widgets/optionbox.h"
 
 
 OptionBox::OptionBox(

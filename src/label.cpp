@@ -1,7 +1,8 @@
 #include <cmath>
 
-#include "label.h"
 #include "utils.h"
+
+#include "widgets/label.h"
 
 
 Label::Label(std::string label, std::string address):

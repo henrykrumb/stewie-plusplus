@@ -1,8 +1,9 @@
 #include <cmath>
 #include <sstream>
 
-#include "radiobutton.h"
 #include "utils.h"
+
+#include "widgets/radiobutton.h"
 
 
 RadioButton::RadioButton(

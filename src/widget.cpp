@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "widget.h"
+#include "widgets/widget.h"
 
 
 Widget::Widget(std::string address):

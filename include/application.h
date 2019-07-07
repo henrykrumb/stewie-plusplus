@@ -16,8 +16,7 @@
 #include <vector>
 
 #include "event.h"
-#include "frame.h"
-#include "widget.h" // for MAKE_ADDRESS macro
+#include "containers/frame.h"
 
 
 #define APP_EVENT_O_LOAD_FRAME "load frame"

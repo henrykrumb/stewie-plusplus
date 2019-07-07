@@ -4,7 +4,8 @@
 #include <thread>
 
 #include "event.h"
-#include "progressbar.h"
+
+#include "widgets/progressbar.h"
 
 
 #define JOB_EVENT_O_FINISH "finish"

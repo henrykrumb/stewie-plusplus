@@ -1,10 +1,11 @@
 #include <cmath>
 #include <sstream>
 
-#include "button.h"
 #include "error.h"
 #include "geometry.h"
 #include "utils.h"
+
+#include "widgets/button.h"
 
 
 Button::Button(std::string label, std::string address):

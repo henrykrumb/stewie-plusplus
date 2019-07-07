@@ -1,6 +1,6 @@
 #include <curses.h>
 
-#include "hbox.h"
+#include "containers/hbox.h"
 
 
 HBox::HBox(std::string address):

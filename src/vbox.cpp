@@ -1,6 +1,6 @@
 #include <curses.h>
 
-#include "vbox.h"
+#include "containers/vbox.h"
 
 
 VBox::VBox(std::string address):

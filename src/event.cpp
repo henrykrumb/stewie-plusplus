@@ -56,36 +56,54 @@ void dispatch_events() {
 				if (!it->second->m_active) {
 					continue;
 				}
+				// handle_event function
 				it->second->handle_event(event);
+				
+				// call named listeners
 				auto listener_map = it->second->m_listener_map;
 				try {
 					auto map_listeners = listener_map.at(event.get_id());
 					for (auto& listener: map_listeners) {
 						listener(event);
 					}
-				} catch (std::exception& e) {}
+				} catch (std::exception& e) {
+					/* no listeners available */
+				}
+				
+				// call unnamed listeners
 				auto listeners = it->second->m_listeners;
 				for (auto& listener: listeners) {
 					listener(event);
 				}
 			}
 		}
+		/* sink provided (directed event) */
 		else {
-			// TODO handle exception :)
-			EventNode* node = event_nodes.at(sink);
-			if (node->m_active) {
-				node->handle_event(event);
-				auto listener_map = node->m_listener_map;
-				try {
-					auto map_listeners = listener_map.at(event.get_id());
-					for (auto& listener: map_listeners) {
+			try {
+				EventNode* node = event_nodes.at(sink);
+				if (node->m_active) {
+					// handle_event function
+					node->handle_event(event);
+					
+					// call named listeners
+					auto listener_map = node->m_listener_map;
+					try {
+						auto map_listeners = listener_map.at(event.get_id());
+						for (auto& listener: map_listeners) {
+							listener(event);
+						}
+					} catch (const std::out_of_range& e) {
+						/* no listener available */
+					}
+					
+					// call unnamed listeners
+					auto listeners = node->m_listeners;
+					for (auto& listener: listeners) {
 						listener(event);
 					}
-				} catch (std::exception& e) {}
-				auto listeners = node->m_listeners;
-				for (auto& listener: listeners) {
-					listener(event);
 				}
+			} catch (const std::out_of_range& oor) {
+				fatal("event sink " + sink + " not available");
 			}
 		}
 	}

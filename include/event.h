@@ -1,10 +1,15 @@
 #pragma once
+ 
+#ifdef __cpp_lib_any
 #include <any>
+#endif
+
 #include <functional>
 #include <map>
 #include <memory>
 #include <string>
 #include <variant>
+#include <vector>
 
 
 /*
@@ -17,8 +22,11 @@
 #define MAKE_ADDRESS(x) \
 	m_address = address.empty() ? #x "::" + std::to_string(s_instances) : address
 
-
+#ifdef __cpp_lib_any
 typedef std::any EventData;
+#else
+typedef std::string EventData;
+#endif
 
 class EventNode;
 

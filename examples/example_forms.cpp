@@ -43,18 +43,20 @@ int example_forms(int argc, char* argv[]) {
 	app->add_frame(frame);
 	
 	std::map<std::string, EvalVariant> evaluation;
-	app->add_listener(
-		[&btn_submit, &form, &evaluation] (const Event& e) {
+	form->add_listener(
+		[form, &evaluation] (const Event& e) {
 			if (e.get_source() == "submit") {
-				btn_submit->send_event(APP_EVENT_I_NEXT_FRAME, "application");
+				form->send_event(APP_EVENT_I_NEXT_FRAME, "application");
 				evaluation = form->evaluate();
 			}
 		}
 	);
 	
+	register_node(app);
 	app->run();
 	
 	for (auto it = evaluation.begin(); it != evaluation.end(); ++it) {
+		#ifdef __cpp_lib_variant
 		try {
 			bool bvalue = std::get<bool>(it->second);
 			std::cout << it->first << "\t" << bvalue << std::endl;
@@ -68,6 +70,10 @@ int example_forms(int argc, char* argv[]) {
 				std::cout << it->first << "\t" << fvalue << std::endl;
 			}
 		}
+		#else
+		std::string value = it->second;
+		std::cout << it->first << "\t" << value << std::endl;
+		#endif
 	}
 	
 	return EXIT_SUCCESS;

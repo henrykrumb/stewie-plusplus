@@ -134,7 +134,14 @@ std::map<std::string, EvalVariant> Container::evaluate(bool recursive) {
 		if (recursive) {
 			std::shared_ptr<Container> c = std::dynamic_pointer_cast<Container>(*it);
 			if (c != nullptr) {
+				#ifdef __cpp_lib_node_extract
 				values.merge(c->evaluate(recursive));
+				#else
+				auto set = c->evaluate(recursive);
+				for (auto jt = set.begin(); jt != set.end(); ++jt) {
+					values.insert(*jt);
+				}
+				#endif
 			}
 		}
 	}

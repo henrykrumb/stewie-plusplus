@@ -68,5 +68,9 @@ void CheckBox::_show(Canvas& canvas) {
 
 
 EvalVariant CheckBox::evaluate() {
+	#ifdef __cpp_lib_variant
 	return EvalVariant(m_state);
+	#else
+	return EvalVariant(std::to_string(m_state));
+	#endif
 }

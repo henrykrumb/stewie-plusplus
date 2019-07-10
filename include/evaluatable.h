@@ -12,10 +12,14 @@
 
 #pragma once
 #include <string>
+
+#ifdef __cpp_lib_variant
 #include <variant>
 
-
 typedef std::variant<bool, int, float, std::string> EvalVariant;
+#else
+typedef std::string EvalVariant;
+#endif
 
 
 class Evaluatable {

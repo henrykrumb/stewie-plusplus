@@ -37,11 +37,15 @@ void ProgressBar::set_progress(const float& progress) {
 
 void ProgressBar::handle_event(const Event& event) {
 	if (event.get_id() == EVENT_SET_PROGRESS) {
-		try {
-			set_progress(std::any_cast<float>(event.get_data()));
-		} catch (const std::bad_any_cast& bac) {
-			fatal("tried to set ProgressBar value with wrong datatype");
-		}
+		#ifdef __cpp_lib_any
+			try {
+				set_progress(std::any_cast<float>(event.get_data()));
+			} catch (const std::bad_any_cast& bac) {
+				fatal("tried to set ProgressBar value with wrong datatype");
+			}
+		#else
+				float progress = std::stof(event.get_data(), nullptr);
+		#endif
 	}
 	else {
 		
@@ -84,5 +88,9 @@ int ProgressBar::_handle_key(const int& key) {
 
 
 EvalVariant ProgressBar::evaluate() {
+	#ifdef __cpp_lib_variant
 	return EvalVariant(m_progress);
+	#else
+	return EvalVariant(std::to_string(m_progress));
+	#endif
 }

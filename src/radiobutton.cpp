@@ -80,5 +80,9 @@ void RadioButton::handle_event(const Event& event) {
 
 
 EvalVariant RadioButton::evaluate() {
+	#ifdef __cpp_lib_variant
 	return EvalVariant(m_state);
+	#else
+	return EvalVariant(std::to_string(m_state));
+	#endif
 }

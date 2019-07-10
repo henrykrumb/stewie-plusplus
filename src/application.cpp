@@ -89,17 +89,20 @@ void Application::handle_event(const Event& event) {
 		}
 	}
 	else if (event.get_id() == APP_EVENT_I_SWITCH_FRAME) {
-		try {
-			auto frame = event.get_data_as_string();
-			for (auto it = m_frames.begin(); it != m_frames.end(); ++it) {
-				if ((*it)->get_address() == frame) {
-					p_switch_frame(it);
-					break;
-				}
-			}
-		} catch (const std::bad_any_cast& bac) {
-			if (!event.get_data().has_value()) {
-				fatal("event data empty");
+		#ifdef __cpp_lib_any
+		if (!event.get_data().has_value()) {
+			fatal("event data empty");
+		}
+		#else
+		if (event.get_data().empty()) {
+			fatal("event data empty");
+		}
+		#endif
+		auto frame = event.get_data_as_string();
+		for (auto it = m_frames.begin(); it != m_frames.end(); ++it) {
+			if ((*it)->get_address() == frame) {
+				p_switch_frame(it);
+				break;
 			}
 		}
 	}
@@ -157,7 +160,11 @@ int Application::run() {
 			case KEY_RESIZE:
 				frame->set_box(Box(0, 0, COLS, LINES - 1));
 				frame->pack();
+				#ifdef __cpp_lib_variant
 				send_event(APP_EVENT_O_RESIZE, "", std::vector<int> {COLS, LINES});
+				#else
+				send_event(APP_EVENT_O_RESIZE, "", std::to_string(COLS) + "," + std::to_string(LINES));
+				#endif
 				break;
 			default:
 				if (s == "^[" || s == "^W") {

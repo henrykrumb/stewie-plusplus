@@ -134,6 +134,7 @@ Event::Event(const Event& event):
 
 
 std::string Event::get_data_as_string() const {
+	#ifdef __cpp_lib_any
 	std::string s;
 	
 	try {
@@ -149,6 +150,9 @@ std::string Event::get_data_as_string() const {
 	}
 	
 	return s;
+	#else
+	return m_data;
+	#endif
 }
 
 

@@ -10,13 +10,25 @@ Canvas::Canvas(bool use_unicode):
 }
 
 
-void Canvas::draw_char(char c, int x, int y) {
+void Canvas::draw_char(char c, int x, int y, bool inverse) {
+	if (inverse) {
+		color_set(1, nullptr);
+	}
 	mvaddch(y, x, c);
+	if (inverse) {
+		color_set(0, nullptr);
+	}
 }
 
 
-void Canvas::draw_text(std::string str, int x, int y) {
+void Canvas::draw_text(std::string str, int x, int y, bool inverse) {
+	if (inverse) {
+		color_set(1, nullptr);
+	}
 	mvaddstr(y, x, str.c_str());
+	if (inverse) {
+		color_set(0, nullptr);
+	}
 }
 
 

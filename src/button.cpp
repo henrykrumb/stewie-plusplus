@@ -42,6 +42,7 @@ void Button::_show(Canvas& canvas) {
 	canvas.draw_text(
 		text,
 		x + roundi((float) (w - d.w()) / 2.0f),
-		y + roundi((float) (h - d.h()) / 2.0f)
+		y + roundi((float) (h - d.h()) / 2.0f),
+		m_focused
 	);
 }

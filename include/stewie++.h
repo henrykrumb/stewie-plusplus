@@ -18,6 +18,7 @@
 #include "widgets/button.h"
 #include "widgets/checkbox.h"
 #include "widgets/label.h"
+#include "widgets/numberbox.h"
 #include "widgets/optionbox.h"
 #include "widgets/progressbar.h"
 #include "widgets/radiobutton.h"

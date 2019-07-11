@@ -13,6 +13,7 @@ list(APPEND SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/job.cpp
 	${CMAKE_CURRENT_LIST_DIR}/label.cpp
 	${CMAKE_CURRENT_LIST_DIR}/listbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/numberbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/optionbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/progressbar.cpp
 	${CMAKE_CURRENT_LIST_DIR}/radiobutton.cpp

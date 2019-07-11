@@ -22,6 +22,9 @@ int example_forms(int argc, char* argv[]) {
 	rdb_pizza->select();
 	
 	ADD_CHILD(form, box_food);
+
+	auto num_amount = std::make_shared<NumberBox>("amount");
+	ADD_CHILD(form, num_amount);
 	
 	/* filter DC */
 	auto chk_cheese = std::make_shared<CheckBox>("add cheese");

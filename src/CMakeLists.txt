@@ -19,4 +19,5 @@ list(APPEND SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/utils.cpp
 	${CMAKE_CURRENT_LIST_DIR}/vbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/widget.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgettree.cpp
 )

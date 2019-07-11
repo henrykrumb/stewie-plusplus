@@ -1,6 +1,0 @@
-VBox vbox
-Label lbltest label="test label one"
-HBox hbox
-Button btn1 label="test"
-Button btn2 label="quit"
-Label lbltest2 label="test label two"

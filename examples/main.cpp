@@ -2,7 +2,7 @@
 
 #include "example_forms.h"
 #include "example_2.h"
-//#include "example_3.h"
+#include "example_json.h"
 #include "example_jobs.h"
 
 
@@ -13,7 +13,7 @@ void usage(char* argv0) {
 	std::cout << "EXAMPLEs are:" << std::endl;
 	std::cout << "forms" << std::endl;
 	std::cout << "2" << std::endl;
-	//std::cout << "3" << std::endl;
+	std::cout << "json" << std::endl;
 	std::cout << "jobs" << std::endl;
 }
 
@@ -34,9 +34,9 @@ int main(int argc, char* argv[]) {
 	else if (example == "2") {
 		status = example_2(argc, argv);
 	}
-	/*else if (example == "3") {
-		status = example_3(argc, argv);
-	}*/
+	else if (example == "json") {
+		status = example_json(argc, argv);
+	}
 	else if (example == "jobs") {
 		status  = example_jobs(argc, argv);
 	}

@@ -43,17 +43,3 @@ void Widget::show(Canvas& canvas) {
 void Widget::pack() {
 	_pack();
 }
-
-
-/*void Widget::set_parameters(std::map<std::string, ParameterVariant> p) {
-	try {
-		ParameterVariant pv_address = p.at("address");
-		try {
-			std::get<std::string>(pv_address);
-		} catch (bad_variant_access& bva) {
-			throw std::runtime_error("invalid type for attribute 'address'");
-		}
-	} catch (out_of_range& oor) {}
-	
-	
-}*/

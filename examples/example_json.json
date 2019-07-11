@@ -1,0 +1,14 @@
+{
+	"type": "VBox",
+	"children": [
+		{
+			"type": "Label",
+			"text": "json generated label"
+		},
+		{
+			"type": "Button",
+			"text": "quit",
+			"address": "btn_quit"
+		}
+	]
+}

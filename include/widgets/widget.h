@@ -12,6 +12,7 @@ class Widget: public EventNode {
 public:
 	Widget(std::string address="");
 	Widget(const Widget& widget) = delete;
+	void operator=(const Widget& widget) = delete;
 	virtual ~Widget() {}
 	
 	virtual int handle_key(const int& c);

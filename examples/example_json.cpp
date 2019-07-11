@@ -2,15 +2,15 @@
 #include <iostream>
 #include <sstream>
 
-#include "example_3.h"
+#include "example_json.h"
 
 #include "../include/stewie++.h"
 
 
-int example_3(int argc, char* argv[]) {
+int example_json(int argc, char* argv[]) {
 	auto app = std::make_shared<Application>("application");
 	
-	std::ifstream ui("../examples/example_3.ui");
+	std::ifstream ui("../examples/example_json.json");
 	std::stringstream sstr;
 	if (ui.is_open()) {
 		std::string line;

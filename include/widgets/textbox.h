@@ -6,11 +6,11 @@
 #include "widgets/widget.h"
 
 
-class NumberBox: public Widget, public Evaluatable {
+class TextBox: public Widget, public Evaluatable {
 public:
-	NumberBox(std::string label, std::string address="");
-	NumberBox(const NumberBox&) = delete;
-	virtual ~NumberBox();
+	TextBox(std::string label, std::string address="");
+	TextBox(const TextBox&) = delete;
+	virtual ~TextBox();
 	
 	virtual void handle_event(const Event& event);
 	virtual int _handle_key(const int& key);
@@ -20,7 +20,8 @@ public:
 
 protected:
 	bool m_empty;
+	int m_cursor_x;
+	int m_cursor_y;
 	std::string m_label;
-	std::string m_value;
-	int m_cursor;
+	std::string m_text;
 };

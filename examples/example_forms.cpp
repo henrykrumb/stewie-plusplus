@@ -26,13 +26,15 @@ int example_forms(int argc, char* argv[]) {
 	auto num_amount = std::make_shared<NumberBox>("amount");
 	ADD_CHILD(form, num_amount);
 	
-	/* filter DC */
 	auto chk_cheese = std::make_shared<CheckBox>("add cheese");
 	ADD_CHILD(form, chk_cheese);
 	
 	std::vector<std::string> options { "no sauce", "corn", "onions", "eggplant" };
 	auto opt_topping = std::make_shared<OptionBox>("topping:", options);
 	ADD_CHILD(form, opt_topping);
+	
+	auto txt_comments = std::make_shared<TextBox>("comments");
+	ADD_CHILD(form, txt_comments);
 	
 	auto prg_1 = std::make_shared<ProgressBar>("progress", "progress");
 	prg_1->set_progress(0.5f);
@@ -69,8 +71,12 @@ int example_forms(int argc, char* argv[]) {
 				std::string svalue = std::get<std::string>(it->second);
 				std::cout << it->first << "\t" << svalue << std::endl;
 			} catch (const std::bad_variant_access& bva2) {
-				float fvalue = std::get<float>(it->second);
-				std::cout << it->first << "\t" << fvalue << std::endl;
+				try {
+					float fvalue = std::get<float>(it->second);
+					std::cout << it->first << "\t" << fvalue << std::endl;
+				} catch (const std::bad_variant_access& bva3) {
+					
+				}
 			}
 		}
 		#else

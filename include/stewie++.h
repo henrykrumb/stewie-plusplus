@@ -22,4 +22,5 @@
 #include "widgets/optionbox.h"
 #include "widgets/progressbar.h"
 #include "widgets/radiobutton.h"
+#include "widgets/textbox.h"
 #include "widgets/widget.h"

@@ -17,6 +17,7 @@ list(APPEND SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/optionbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/progressbar.cpp
 	${CMAKE_CURRENT_LIST_DIR}/radiobutton.cpp
+	${CMAKE_CURRENT_LIST_DIR}/textbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/utils.cpp
 	${CMAKE_CURRENT_LIST_DIR}/vbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/widget.cpp

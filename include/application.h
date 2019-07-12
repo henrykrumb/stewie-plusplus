@@ -42,9 +42,12 @@
 std::string application_status_to_string(int status);
 
 
-class Application: public EventNode {
+class Application:
+		public EventNode,
+		public std::enable_shared_from_this<Application> {
 public:
-	Application(std::string address="");
+	static std::shared_ptr<Application> instance();
+	
 	Application(const Application&) = delete;
 	virtual ~Application() {}
 	
@@ -55,9 +58,14 @@ public:
 	int run();
 
 protected:
-	void p_switch_frame(std::vector<std::shared_ptr<Frame>>::iterator it);
+	Application();
 	
-	static int s_instances;
+	static std::shared_ptr<Application> s_instance;
+	std::shared_ptr<Application> getptr() {
+		return shared_from_this();
+	}
+	
+	void p_switch_frame(std::vector<std::shared_ptr<Frame>>::iterator it);
 	
 	bool m_quit;
 	int m_status;

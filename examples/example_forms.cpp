@@ -6,7 +6,7 @@
 
 
 int example_forms(int argc, char* argv[]) {
-	auto app = std::make_shared<Application>("application");
+	auto app = Application::instance();
 	
 	auto frame = std::make_shared<Frame>();
 	auto form = std::make_shared<VBox>();
@@ -57,7 +57,6 @@ int example_forms(int argc, char* argv[]) {
 		}
 	);
 	
-	register_node(app);
 	app->run();
 	
 	for (auto it = evaluation.begin(); it != evaluation.end(); ++it) {

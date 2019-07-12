@@ -19,6 +19,19 @@ static void s_exit() {
 }
 
 
+std::shared_ptr<Application> Application::s_instance = nullptr;
+
+
+std::shared_ptr<Application> Application::instance() {
+	if (!s_instance) {
+		Application* app = new Application();
+		s_instance = std::shared_ptr<Application>(app);
+		register_node(s_instance);
+	}
+	return s_instance;
+}
+
+
 std::string application_status_to_string(int status) {
 	switch (status) {
 		case APP_STATUS_NO_FRAMES:
@@ -37,16 +50,11 @@ std::string application_status_to_string(int status) {
 
 
 
-int Application::s_instances = 0;
-
-
-Application::Application(std::string address):
-		EventNode(address),
+Application::Application():
+		EventNode("application"),
 		m_quit(false),
 		m_status(APP_STATUS_OK)
 {
-	MAKE_ADDRESS(Application);
-	s_instances++;
 }
 
 

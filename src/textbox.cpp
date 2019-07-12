@@ -30,6 +30,8 @@ void TextBox::handle_event(const Event& event) {
 
 
 int TextBox::_handle_key(const int& key) {
+	Dimension d = stringsize(m_text);
+	
 	if (isgraph(key) || key == ' ') {
 		if (m_empty) {
 			m_text = "";
@@ -41,6 +43,23 @@ int TextBox::_handle_key(const int& key) {
 		m_cursor_x++;
 		return 0;
 	}
+	else if (key == '\t') {
+		// FIXME use real tabs instead of a fixed number of spaces
+		if (m_empty) {
+			m_text = "";
+			m_empty = false;
+			m_cursor_x = 0;
+			m_cursor_y = 0;
+		}
+		m_text = m_text.insert(m_cursor_x, "    ");
+		m_cursor_x += 4;
+		return 0;
+	}
+	/*else if (key == '\n') {
+		m_text = m_text.insert(m_cursor_y, "\n");
+		m_cursor_x = 0;
+		m_cursor_y++;
+	}*/
 	else if (key == KEY_LEFT) {
 		if (m_empty) {
 			return key;
@@ -62,9 +81,23 @@ int TextBox::_handle_key(const int& key) {
 		return 0;
 	}
 	else if (key == KEY_UP) {
-		return key;
+		if (m_empty) {
+			return key;
+		}
+		if (m_cursor_y <= 0) {
+			return key;
+		}
+		m_cursor_y--;
+		return 0;
 	}
 	else if (key == KEY_DOWN) {
+		if (m_empty) {
+			return key;
+		}
+		if (m_cursor_y >= d.h() - 1) {
+			return key;
+		}
+		m_cursor_y++;
 		return key;
 	}
 	else if (key == KEY_BACKSPACE) {
@@ -104,7 +137,7 @@ void TextBox::_show(Canvas& canvas) {
 		canvas.draw_char(
 			c,
 			x + roundi((float) (w - d.w()) / 2.0f) + m_cursor_x,
-			y + roundi((float) (h - texth) / 2.0f),
+			y + roundi((float) (h - texth) / 2.0f) + m_cursor_y,
 			true
 		);
 	}

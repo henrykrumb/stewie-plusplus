@@ -62,7 +62,7 @@ std::shared_ptr<Frame> make_frame_2() {
 
 
 int example_2(int argc, char* argv[]) {
-	auto app = std::make_shared<Application>("application");
+	auto app = Application::instance();
 	
 	auto frame_1 = make_frame_1();
 	auto frame_2 = make_frame_2();

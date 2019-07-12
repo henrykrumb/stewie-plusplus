@@ -8,7 +8,7 @@
 
 
 int example_json(int argc, char* argv[]) {
-	auto app = std::make_shared<Application>("application");
+	auto app = Application::instance();
 	
 	std::ifstream ui("../examples/example_json.json");
 	std::stringstream sstr;

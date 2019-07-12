@@ -24,8 +24,7 @@ void my_job(Job& j, long iterations) {
 
 
 int example_jobs(int argc, char* argv[]) {
-	auto app = std::make_shared<Application>("application");
-	register_node(app);
+	auto app = Application::instance();
 	
 	auto frame = std::make_shared<Frame>("frame");
 	

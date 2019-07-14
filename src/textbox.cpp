@@ -16,6 +16,7 @@ TextBox::TextBox(std::string label, std::string address):
 {
 	MAKE_ADDRESS(TextBox);
 	m_focusable = true;
+	m_editable = true;
 }
 
 

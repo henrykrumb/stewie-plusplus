@@ -32,27 +32,25 @@ void Canvas::draw_text(std::string str, int x, int y, bool inverse) {
 }
 
 
-void Canvas::draw_frame(Box box, bool thick) {
+void Canvas::draw_frame(Box box, bool thick, bool inverse) {
 	int x = box.x(), y = box.y(), w = box.w(), h = box.h();
 	
-	color_set(1, nullptr);
-	
+	char c = thick ? '#' : '|';
 	for (int fy = 1; fy < h; fy++) {
-		draw_char('|', x, fy + y);
-		draw_char('|', x + w - 1, fy + y);
+		draw_char(c, x, fy + y, inverse);
+		draw_char(c, x + w - 1, fy + y, inverse);
 	}
 	
+	c = thick ? '#' : '-';
 	for (int fx = 1; fx < w - 1; fx++) {
-		draw_char('-', fx + x, y);
-		draw_char('-', fx + x, y + h - 1);
+		draw_char(c, fx + x, y, inverse);
+		draw_char(c, fx + x, y + h - 1, inverse);
 	}
 	
-	draw_char('+', x, y);
-	draw_char('+', x + w - 1, y);
-	draw_char('+', x + w - 1, y + h - 1);
-	draw_char('+', x, y + h - 1);
-	
-	color_set(0, nullptr);
+	draw_char('+', x, y, inverse);
+	draw_char('+', x + w - 1, y, inverse);
+	draw_char('+', x + w - 1, y + h - 1, inverse);
+	draw_char('+', x, y + h - 1, inverse);
 }
 
 

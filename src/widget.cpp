@@ -8,6 +8,7 @@ Widget::Widget(std::string address):
 		EventNode(address),
 		m_box(0, 0, 0, 0),
 		m_focusable(false),
+		m_editable(false),
 		m_focused(false),
 		m_visible(true)
 {
@@ -34,6 +35,9 @@ void Widget::show(Canvas& canvas) {
 	if (m_visible) {
 		if (m_focused) {
 			canvas.draw_box(m_box);
+		}
+		if (m_editable) {
+			canvas.draw_frame(m_box, false, false);
 		}
 		_show(canvas);
 	}

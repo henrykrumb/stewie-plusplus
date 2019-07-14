@@ -51,6 +51,7 @@ protected:
 	Widget* m_parent;
 	
 	bool m_focusable;
+	bool m_editable;
 	bool m_focused;
 	bool m_visible;
 	bool m_active;

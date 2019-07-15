@@ -146,7 +146,15 @@ float NumberBox::get_value() {
 
 
 void NumberBox::set_value(float f) {
-	m_value = std::to_string(f);
+	if (f < 0 && !m_allow_negative) {
+		f *= -1;
+	}
+	if (m_allow_float) {
+		m_value = std::to_string(f);
+	}
+	else {
+		m_value = std::to_string((int) f);
+	}
 	m_cursor = 0;
 	m_empty = false;
 }

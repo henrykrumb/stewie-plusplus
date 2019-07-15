@@ -78,7 +78,7 @@ int NumberBox::_handle_key(const int& key) {
 		m_cursor++;
 		return 0;
 	}
-	else if (key == KEY_BACKSPACE) {
+	else if (key == KEY_BACKSPACE || key == '\b' || key == 127) {
 		if (m_cursor > 0) {
 			m_value = m_value.erase(m_cursor - 1);
 			m_cursor--;
@@ -89,6 +89,23 @@ int NumberBox::_handle_key(const int& key) {
 			}
 			return 0;
 		}
+	}
+	else if (key == 'x') {
+		if (m_value.size() >= m_cursor) {
+			m_value = m_value.erase(m_cursor);
+			if (m_value.empty()) {
+				m_empty = true;
+				m_value = "0";
+				m_cursor = 0;
+			}
+			return 0;
+		}
+	}
+	else if (key == 'd') {
+		m_empty = true;
+		m_value = "0";
+		m_cursor = 0;
+		return 0;
 	}
 	return key;
 }

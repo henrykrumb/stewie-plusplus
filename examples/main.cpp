@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 		status  = example_jobs(argc, argv);
 	}
 	else {
-		std::cout << "example '" << example << "' not available" << std::endl;
+		std::cout << "example '" << example.c_str() << "' not available" << std::endl;
 		status = EXIT_FAILURE;
 	}
 	

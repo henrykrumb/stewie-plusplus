@@ -27,7 +27,9 @@ NumberBox::~NumberBox() {
 
 
 void NumberBox::handle_event(const Event& event) {
-	
+	if (event.get_id() == NUMBERBOX_EVENT_I_SET_VALUE) {
+		// TODO implement me
+	}
 }
 
 
@@ -145,6 +147,8 @@ float NumberBox::get_value() {
 
 void NumberBox::set_value(float f) {
 	m_value = std::to_string(f);
+	m_cursor = 0;
+	m_empty = false;
 }
 
 

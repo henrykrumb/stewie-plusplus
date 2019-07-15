@@ -16,6 +16,8 @@ public:
 	
 	virtual int _handle_key(const int& c);
 	virtual void _show(Canvas& canvas);
+	
+	virtual void set_text(std::string text);
 
 protected:
 	std::string m_label;

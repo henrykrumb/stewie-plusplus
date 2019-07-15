@@ -35,3 +35,8 @@ void Label::_show(Canvas& canvas) {
 int Label::_handle_key(const int& c) {
 	return c;
 }
+
+
+void Label::set_text(std::string text) {
+	m_label = text;
+}

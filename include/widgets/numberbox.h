@@ -6,6 +6,9 @@
 #include "widgets/widget.h"
 
 
+#define NUMBERBOX_EVENT_I_SET_VALUE "set value"
+
+
 class NumberBox: public Widget, public Evaluatable {
 public:
 	NumberBox(std::string label, std::string address="");

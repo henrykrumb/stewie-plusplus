@@ -6,6 +6,13 @@
 #include "widgettree.h"
 
 
+static std::shared_ptr<Widget> string_to_widget(std::string str) {
+	if (str == "button") {
+		
+	}
+}
+
+
 static std::shared_ptr<Widget> walk_children(rapidjson::Value node) {
 	// if node has children
 	rapidjson::Value::ConstMemberIterator itr = node.FindMember("children");

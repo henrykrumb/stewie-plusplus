@@ -11,7 +11,9 @@ NumberBox::NumberBox(std::string label, std::string address):
 		m_empty(true),
 		m_label(label),
 		m_value("0"),
-		m_cursor(0)
+		m_cursor(0),
+		m_allow_negative(true),
+		m_allow_float(true)
 {
 	MAKE_ADDRESS(NumberBox);
 	m_focusable = true;
@@ -30,7 +32,9 @@ void NumberBox::handle_event(const Event& event) {
 
 
 int NumberBox::_handle_key(const int& key) {
-	if (isdigit(key)) {
+	/* 'key' can be > 255 (e.g. when arrow keys are pressed).
+	 * In MSVC standard library, 'isdigit(...)' has a range check assert. */
+	if ('0' <= key && key <= '9') {
 		if (m_empty) {
 			m_value = "";
 			m_empty = false;
@@ -38,6 +42,20 @@ int NumberBox::_handle_key(const int& key) {
 		}
 		m_value = m_value.insert(m_cursor, std::to_string(key - '0'));
 		m_cursor++;
+		return 0;
+	}
+	else if (key == '-' && m_allow_negative) {
+		if (m_cursor == 0) {
+			m_value = m_value.insert(m_cursor, "-");
+			m_cursor = 1;
+		}
+		return 0;
+	}
+	else if (key == '.' && m_allow_float) {
+		if (m_value.find('.') == std::string::npos) {
+			m_value = m_value.insert(m_cursor, ".");
+			m_cursor++;
+		}
 		return 0;
 	}
 	else if (key == KEY_LEFT) {
@@ -100,6 +118,26 @@ void NumberBox::_show(Canvas& canvas) {
 			true
 		);
 	}
+}
+
+
+float NumberBox::get_value() {
+	return std::stof(m_value, nullptr);
+}
+
+
+void NumberBox::set_value(float f) {
+	m_value = std::to_string(f);
+}
+
+
+void allow_negative(bool an) {
+	m_allow_negative = an;
+}
+
+
+void allow_float(bool af) {
+	m_allow_float = af;
 }
 
 

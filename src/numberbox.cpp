@@ -131,12 +131,12 @@ void NumberBox::set_value(float f) {
 }
 
 
-void allow_negative(bool an) {
+void NumberBox::allow_negative(bool an) {
 	m_allow_negative = an;
 }
 
 
-void allow_float(bool af) {
+void NumberBox::allow_float(bool af) {
 	m_allow_float = af;
 }
 

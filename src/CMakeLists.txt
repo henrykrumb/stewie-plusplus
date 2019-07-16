@@ -1,4 +1,5 @@
 list(APPEND SOURCES
+	${CMAKE_CURRENT_LIST_DIR}/containers/centralbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/application.cpp
 	${CMAKE_CURRENT_LIST_DIR}/button.cpp
 	${CMAKE_CURRENT_LIST_DIR}/canvas.cpp

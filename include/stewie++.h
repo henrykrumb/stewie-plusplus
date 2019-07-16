@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "widgettree.h"
 
+#include "containers/centralbox.h"
 #include "containers/container.h"
 #include "containers/frame.h"
 #include "containers/hbox.h"

@@ -4,6 +4,7 @@
 #include "example_2.h"
 #include "example_json.h"
 #include "example_jobs.h"
+#include "example_centralbox.h"
 
 
 void usage(char* argv0) {
@@ -39,6 +40,9 @@ int main(int argc, char* argv[]) {
 	}
 	else if (example == "jobs") {
 		status  = example_jobs(argc, argv);
+	}
+	else if (example == "centralbox") {
+		status = example_centralbox(argc, argv);
 	}
 	else {
 		std::cout << "example '" << example.c_str() << "' not available" << std::endl;

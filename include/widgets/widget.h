@@ -38,10 +38,14 @@ public:
 	Box get_box() const { return m_box; }
 	void set_box(Box box);
 	void set_parent(Widget* parent);
+	
+	virtual Dimension get_minimum_dimensions() { return m_min_dimensions; }
+	virtual void set_minimum_dimensions(Dimension dim) { m_min_dimensions = dim; }
 
 protected:
 	std::string m_content;
 	Box m_box;
+	Dimension m_min_dimensions;
 	
 	/*
 	 * This needs to be a standard C pointer, as we want to pass it "this"

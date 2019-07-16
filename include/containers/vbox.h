@@ -11,8 +11,10 @@ public:
 	VBox(const VBox& vbox) = delete;
 	~VBox();
 	
-	void _pack();
-	int _handle_key(const int& key);
+	virtual void _pack();
+	virtual int _handle_key(const int& key);
+	
+	virtual Dimension get_minimum_dimensions();
 
 protected:
 	

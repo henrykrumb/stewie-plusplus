@@ -50,6 +50,8 @@ public:
 	bool focus_first();
 	bool focus_next();
 	bool focus_previous();
+	
+	virtual Dimension get_minimum_dimensions();
 
 protected:
 	std::shared_ptr<Widget> m_focused_child;

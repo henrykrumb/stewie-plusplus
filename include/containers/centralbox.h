@@ -12,6 +12,8 @@ public:
 	virtual bool _add_child(std::shared_ptr<Widget> widget);
 	virtual void _pack();
 	virtual int _handle_key(const int& c);
+	
+	virtual Dimension get_minimum_dimensions();
 
 protected:
 	

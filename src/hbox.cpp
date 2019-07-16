@@ -48,3 +48,25 @@ int HBox::_handle_key(const int& key) {
 	}
 	return 0;
 }
+
+
+Dimension HBox::get_minimum_dimensions() {
+	int min_w = m_min_dimensions.w(), min_h = m_min_dimensions.h();
+	// accumulated minimum height
+	int acc_w = 0;
+	
+	for(auto& child: m_children) {
+		auto child_dmin = child->get_minimum_dimensions();
+		
+		if (min_h < child_dmin.h()) {
+			min_h = child_dmin.h();
+		}
+		acc_w += child_dmin.w();
+	}
+	
+	if (min_w < acc_w) {
+		min_w = acc_w;
+	}
+	
+	return Dimension(min_w, min_h);
+}

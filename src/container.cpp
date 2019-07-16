@@ -249,3 +249,25 @@ bool Container::focus_previous() {
 	return false;
 }
 
+
+/**
+ * Return the maximum minimum dimensions of all children and the container
+ * widget itself.
+ */
+Dimension Container::get_minimum_dimensions() {
+	int min_w = m_min_dimensions.w(), min_h = m_min_dimensions.h();
+	
+	for(auto& child: m_children) {
+		auto child_dmin = child->get_minimum_dimensions();
+		
+		if (min_w < child_dmin.w()) {
+			min_w = child_dmin.w();
+		}
+		
+		if (min_h < child_dmin.h()) {
+			min_h = child_dmin.h();
+		}
+	}
+	
+	return Dimension(min_w, min_h);
+}

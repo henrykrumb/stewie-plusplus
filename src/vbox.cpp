@@ -48,3 +48,25 @@ int VBox::_handle_key(const int& key) {
 	}
 	return 0;
 }
+
+
+Dimension VBox::get_minimum_dimensions() {
+	int min_w = m_min_dimensions.w(), min_h = m_min_dimensions.h();
+	// accumulated minimum height
+	int acc_h = 0;
+	
+	for(auto& child: m_children) {
+		auto child_dmin = child->get_minimum_dimensions();
+		
+		if (min_w < child_dmin.w()) {
+			min_w = child_dmin.w();
+		}
+		acc_h += child_dmin.h();
+	}
+	
+	if (min_h < acc_h) {
+		min_h = acc_h;
+	}
+	
+	return Dimension(min_w, min_h);
+}

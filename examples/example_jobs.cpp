@@ -27,9 +27,7 @@ int example_jobs(int argc, char* argv[]) {
 	auto app = Application::instance();
 	
 	auto frame = std::make_shared<Frame>("frame");
-	
 	auto vbox = std::make_shared<VBox>();
-	
 	auto prg_job = std::make_shared<ProgressBar>("job progress");
 	MAKE_BUTTON(btn_start, "start job");
 	MAKE_BUTTON(btn_restart, "restart job");

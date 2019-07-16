@@ -10,6 +10,8 @@ public:
 
 	virtual void _pack();
 	virtual int _handle_key(const int& key);
+	
+	virtual Dimension get_minimum_dimensions();
 
 protected:
 	

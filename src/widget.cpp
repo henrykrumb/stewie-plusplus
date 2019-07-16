@@ -7,6 +7,7 @@
 Widget::Widget(std::string address):
 		EventNode(address),
 		m_box(0, 0, 0, 0),
+		m_min_dimensions(0, 3),
 		m_focusable(false),
 		m_editable(false),
 		m_focused(false),

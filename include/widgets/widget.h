@@ -2,8 +2,9 @@
 
 #include <string>
 
+#include "events/eventnode.h"
+
 #include "canvas.h"
-#include "event.h"
 #include "geometry.h"
 #include "utils.h"
 

@@ -1,26 +1,30 @@
 list(APPEND SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/containers/centralbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/containers/container.cpp
+	${CMAKE_CURRENT_LIST_DIR}/containers/frame.cpp
+	${CMAKE_CURRENT_LIST_DIR}/containers/hbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/containers/listbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/containers/vbox.cpp
+	
+	${CMAKE_CURRENT_LIST_DIR}/events/event.cpp
+	${CMAKE_CURRENT_LIST_DIR}/events/eventnode.cpp
+	
+	${CMAKE_CURRENT_LIST_DIR}/widgets/button.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/checkbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/label.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/numberbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/optionbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/progressbar.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/radiobutton.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/textbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/widget.cpp
+	
 	${CMAKE_CURRENT_LIST_DIR}/application.cpp
-	${CMAKE_CURRENT_LIST_DIR}/button.cpp
 	${CMAKE_CURRENT_LIST_DIR}/canvas.cpp
-	${CMAKE_CURRENT_LIST_DIR}/checkbox.cpp
-	${CMAKE_CURRENT_LIST_DIR}/container.cpp
 	${CMAKE_CURRENT_LIST_DIR}/error.cpp
 	${CMAKE_CURRENT_LIST_DIR}/evaluatable.cpp
-	${CMAKE_CURRENT_LIST_DIR}/event.cpp
-	${CMAKE_CURRENT_LIST_DIR}/frame.cpp
 	${CMAKE_CURRENT_LIST_DIR}/geometry.cpp
-	${CMAKE_CURRENT_LIST_DIR}/hbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/job.cpp
-	${CMAKE_CURRENT_LIST_DIR}/label.cpp
-	${CMAKE_CURRENT_LIST_DIR}/listbox.cpp
-	${CMAKE_CURRENT_LIST_DIR}/numberbox.cpp
-	${CMAKE_CURRENT_LIST_DIR}/optionbox.cpp
-	${CMAKE_CURRENT_LIST_DIR}/progressbar.cpp
-	${CMAKE_CURRENT_LIST_DIR}/radiobutton.cpp
-	${CMAKE_CURRENT_LIST_DIR}/textbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/utils.cpp
-	${CMAKE_CURRENT_LIST_DIR}/vbox.cpp
-	${CMAKE_CURRENT_LIST_DIR}/widget.cpp
 	${CMAKE_CURRENT_LIST_DIR}/widgettree.cpp
 )

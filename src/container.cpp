@@ -101,7 +101,6 @@ std::shared_ptr<Widget> Container::get_child(std::string address, bool recursive
 
 void Container::pack() {
 	_pack();
-	focus_first();
 	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
 		(*it)->pack();
 	}
@@ -151,6 +150,7 @@ std::map<std::string, EvalVariant> Container::evaluate(bool recursive) {
 
 
 void Container::set_focus(const bool& focus) {
+	m_focused = focus;
 	if (focus) {
 		focus_first();
 	}

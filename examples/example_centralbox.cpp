@@ -18,11 +18,16 @@ int example_centralbox(int argc, char* argv[]) {
 
 	MAKE_BUTTON(btn_top, "top");
 	MAKE_BUTTON(btn_middle, "middle");
+	
+	auto hbox = std::make_shared<HBox>();
+	MAKE_BUTTON(btn_bottom, "bottom");
 	MAKE_BUTTON(btn_quit, "quit");
 	
 	ADD_CHILD(cbox, btn_top);
 	ADD_CHILD(cbox, btn_middle);
-	ADD_CHILD(cbox, btn_quit);
+	ADD_CHILD(hbox, btn_bottom);
+	ADD_CHILD(hbox, btn_quit);
+	ADD_CHILD(cbox, hbox);
 	ADD_CHILD(frame, cbox);
 	
 	frame->add_listener("activate",

@@ -36,7 +36,7 @@ void ProgressBar::set_progress(const float& progress) {
 
 
 void ProgressBar::handle_event(const Event& event) {
-	if (event.get_id() == EVENT_SET_PROGRESS) {
+	if (event.get_id() == PROGRESSBAR_I_EVENT_SET_PROGRESS) {
 		#ifdef __cpp_lib_any
 			try {
 				set_progress(std::any_cast<float>(event.get_data()));

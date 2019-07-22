@@ -3,7 +3,7 @@
 #include "widget.h"
 
 
-#define EVENT_SET_PROGRESS "set progress"
+#define PROGRESSBAR_I_EVENT_SET_PROGRESS "set progress"
 
 
 class ProgressBar: public Widget, public Evaluatable {

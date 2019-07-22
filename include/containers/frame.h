@@ -2,8 +2,9 @@
 
 #include <string>
 
+#include "events/event.h"
+
 #include "canvas.h"
-#include "event.h"
 #include "geometry.h"
 
 #include "containers/container.h"

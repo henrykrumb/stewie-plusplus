@@ -2,8 +2,9 @@
 #include <map>
 #include <string>
 
+#include "events/event.h"
+
 #include "evaluatable.h"
-#include "event.h"
 #include "widget.h"
 
 

@@ -2,8 +2,9 @@
 
 #include <vector>
 
+#include "events/event.h"
+
 #include "evaluatable.h"
-#include "event.h"
 #include "geometry.h"
 
 #include "widgets/widget.h"

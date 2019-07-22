@@ -1,8 +1,10 @@
 #pragma once
+
 #include "canvas.h"
-#include "event.h"
 
 #include "containers/container.h"
+
+#include "events/event.h"
 
 
 class VBox: public Container {

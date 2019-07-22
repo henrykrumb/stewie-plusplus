@@ -6,7 +6,6 @@
 #include "application.h"
 #include "canvas.h"
 #include "error.h"
-#include "event.h"
 #include "geometry.h"
 
 

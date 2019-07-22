@@ -4,11 +4,13 @@
 #include "canvas.h"
 #include "error.h"
 #include "evaluatable.h"
-#include "event.h"
 #include "geometry.h"
 #include "job.h"
 #include "utils.h"
 #include "widgettree.h"
+
+#include "events/event.h"
+#include "events/eventnode.h"
 
 #include "containers/centralbox.h"
 #include "containers/container.h"

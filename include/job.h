@@ -3,7 +3,7 @@
 #include <functional>
 #include <thread>
 
-#include "event.h"
+#include "events/event.h"
 
 #include "widgets/progressbar.h"
 

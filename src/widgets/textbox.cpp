@@ -75,7 +75,7 @@ int TextBox::_handle_key(const int& key) {
 		if (m_empty) {
 			return key;
 		}
-		if (m_cursor_x >= m_text.size()) {
+		if (m_cursor_x >= (int) m_text.size()) {
 			return key;
 		}
 		m_cursor_x++;
@@ -131,7 +131,7 @@ void TextBox::_show(Canvas& canvas) {
 	
 	if (m_focused) {
 		char c = '_';
-		if (m_cursor_x < m_text.size()) {
+		if (m_cursor_x < (int) m_text.size()) {
 			c = m_text[m_cursor_x];
 		}
 		int texth = d.h() ? d.h() : 1;

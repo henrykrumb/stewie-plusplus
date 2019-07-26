@@ -1,9 +1,10 @@
-#include <curses>
+#include <curses.h>
 
-#include "tablebox.h"
+#include "containers/tablebox.h"
 
 
-TableBox::TableBox(int columns, int rows):
+TableBox::TableBox(int columns, int rows, std::string address):
+	Container(address),
 	m_columns(columns),
 	m_rows(rows)
 {
@@ -28,7 +29,7 @@ void TableBox::_pack() {
 	int row = 0;
 	
 	for (auto it = m_children.begin(); it != m_children.end(); ++it) {
-		Box box(x + column * childwidht, y + row * childheight, childwidth, childheight);
+		Box box(x + column * childwidth, y + row * childheight, childwidth, childheight);
 		(*it)->set_box(box);
 		column++;
 		if (column >= m_columns) {
@@ -36,6 +37,11 @@ void TableBox::_pack() {
 			row++;
 		}
 	}
+}
+
+
+void TableBox::handle_event(const Event& event) {
+	
 }
 
 

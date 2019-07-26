@@ -4,6 +4,7 @@ list(APPEND SOURCES
 	${CMAKE_CURRENT_LIST_DIR}/containers/frame.cpp
 	${CMAKE_CURRENT_LIST_DIR}/containers/hbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/containers/listbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/containers/tablebox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/containers/vbox.cpp
 	
 	${CMAKE_CURRENT_LIST_DIR}/events/event.cpp

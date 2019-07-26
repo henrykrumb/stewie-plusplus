@@ -11,7 +11,11 @@ void register_node(std::shared_ptr<EventNode> node);
 void unregister_node(std::shared_ptr<EventNode> node);
 
 void enqueue_event(Event event);
-void enqueue_event(std::string id, std::string source="", std::string sink="", EventData data="");
+void enqueue_event(
+	const std::string& id,
+	const std::string& source="",
+	const std::string& sink="",
+	const EventData& data="");
 void dispatch_events();
 
 class EventNode {

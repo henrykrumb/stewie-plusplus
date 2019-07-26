@@ -29,10 +29,10 @@ typedef std::string EventData;
 class Event {
 public:
 	Event(
-		std::string id,
-		std::string source,
-		std::string sink="",
-		EventData data=""
+		const std::string& id,
+		const std::string& source,
+		const std::string& sink="",
+		const EventData& data=""
 	);
 	Event(const Event& event);
 	virtual ~Event() {}

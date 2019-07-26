@@ -35,10 +35,10 @@ void enqueue_event(Event event) {
 
 
 void enqueue_event(
-		std::string id,
-		std::string source,
-		std::string sink,
-		EventData data
+		const std::string& id,
+		const std::string& source,
+		const std::string& sink,
+		const EventData& data
 ) {
 	event_queue.push(Event(id, source, sink, data));
 }
@@ -137,9 +137,9 @@ void EventNode::add_listener(std::string id, std::function<void(const Event&)> l
 
 
 void EventNode::send_event(
-		std::string id,
-		std::string sink,
-		EventData data
+		const std::string& id,
+		const std::string& sink,
+		const EventData& data
 ) {
 	enqueue_event(id, m_address, sink, data);
 }

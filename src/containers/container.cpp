@@ -257,7 +257,7 @@ bool Container::focus_previous() {
 Dimension Container::get_minimum_dimensions() {
 	int min_w = m_min_dimensions.w(), min_h = m_min_dimensions.h();
 	
-	for(auto& child: m_children) {
+	for (auto& child: m_children) {
 		auto child_dmin = child->get_minimum_dimensions();
 		
 		if (min_w < child_dmin.w()) {
@@ -270,4 +270,13 @@ Dimension Container::get_minimum_dimensions() {
 	}
 	
 	return Dimension(min_w, min_h);
+}
+
+
+bool Container::is_focusable() const {
+	for (auto& child: m_children) {
+		if (child->is_focusable()) {
+			return true;
+		}
+	}
 }

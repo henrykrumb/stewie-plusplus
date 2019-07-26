@@ -12,11 +12,6 @@
 static std::queue<Event> event_queue;
 
 
-void enqueue_event(Event event) {
-	event_queue.push(event);
-}
-
-
 int EventNode::s_instances = 0;
 static std::map<std::string, std::shared_ptr<EventNode>> event_nodes;
 
@@ -31,6 +26,11 @@ void register_node(std::shared_ptr<EventNode> node) {
 
 void unregister_node(std::shared_ptr<EventNode> node) {
 	event_nodes.erase(node->get_address());
+}
+
+
+void enqueue_event(Event event) {
+	event_queue.push(event);
 }
 
 

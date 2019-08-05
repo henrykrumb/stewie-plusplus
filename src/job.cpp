@@ -103,16 +103,12 @@ void Job::set_progress(float progress) {
 	if (!m_progressbar) {
 		return;
 	}
+	
 	if (progress < 0.0f || progress > 1.0f) {
 		throw std::invalid_argument("invalid progress value");
 	}
+	
 	m_progressbar->set_progress(progress);
-	/*
-	send_event(
-		PROGRESSBAR_I_EVENT_SET_PROGRESS,
-		m_progressbar->get_address(),
-		std::to_string(progress)
-	);*/
 }
 
 

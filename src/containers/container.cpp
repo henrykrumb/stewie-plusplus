@@ -279,4 +279,5 @@ bool Container::is_focusable() const {
 			return true;
 		}
 	}
+	return false;
 }

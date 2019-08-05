@@ -6,6 +6,7 @@
 #include "evaluatable.h"
 #include "geometry.h"
 #include "job.h"
+#include "safequeue.h"
 #include "utils.h"
 #include "widgettree.h"
 

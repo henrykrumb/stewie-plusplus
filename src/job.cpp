@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "error.h"
 #include "job.h"
 
 

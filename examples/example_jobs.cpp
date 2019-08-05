@@ -42,7 +42,7 @@ int example_jobs(int argc, char* argv[]) {
 	ADD_CHILD(frame, vbox);
 	
 	auto job = std::make_shared<Job>(
-		std::bind(my_job, std::placeholders::_1, 100000000),
+		std::bind(my_job, std::placeholders::_1, 100000),
 		prg_job,
 		"my_job"
 	);

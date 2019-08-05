@@ -7,9 +7,10 @@
 #include "events/eventnode.h"
 
 #include "error.h"
+#include "safequeue.h"
 
 
-static std::queue<Event> event_queue;
+static SafeQueue<Event> event_queue;
 
 
 int EventNode::s_instances = 0;
@@ -30,7 +31,7 @@ void unregister_node(std::shared_ptr<EventNode> node) {
 
 
 void enqueue_event(Event event) {
-	event_queue.push(event);
+	event_queue.enqueue(event);
 }
 
 
@@ -40,17 +41,14 @@ void enqueue_event(
 		const std::string& sink,
 		const EventData& data
 ) {
-	event_queue.push(Event(id, source, sink, data));
+	event_queue.enqueue(Event(id, source, sink, data));
 }
 
 
 void dispatch_events() {
 	/* copy event queue */
-	std::queue<Event> queue = event_queue;
-	while (!queue.empty()) {
-		Event event = queue.front();
-		queue.pop();
-		event_queue.pop();
+	while (!event_queue.empty()) {
+		Event event = event_queue.dequeue();
 		
 		std::string sink = event.get_sink();
 		

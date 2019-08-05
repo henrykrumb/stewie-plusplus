@@ -53,7 +53,7 @@ public:
 	bool is_running();
 
 protected:
-	bool m_running;
+	std::atomic_bool m_running;
 	JobStatus m_status;
 	JobFunction m_run;
 	std::shared_ptr<ProgressBar> m_progressbar;

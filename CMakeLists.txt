@@ -17,6 +17,8 @@ endif ()
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 include(src/CMakeLists.txt)
+include(include/CMakeLists.txt)
+
 
 if (UNIX)
 	add_library(stewie++ SHARED ${SOURCES})

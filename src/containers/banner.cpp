@@ -59,6 +59,13 @@ int Banner::_handle_key(const int& key) {
 }
 
 
+void Banner::handle_event(const Event& ev) {
+	if (ev.get_id() == BANNER_EVENT_I_SET_TEXT) {
+		set_text(ev.get_data_as_string());
+	}
+}
+
+
 Dimension Banner::get_minimum_dimensions() {
 	int min_w = m_min_dimensions.w(), min_h = m_min_dimensions.h();
 	// accumulated minimum height

@@ -16,15 +16,17 @@ int example_centralbox(int argc, char* argv[]) {
 	auto frame = std::make_shared<Frame>("frame");
 	auto cbox = std::make_shared<CentralBox>();
 
-	MAKE_BUTTON(btn_top, "top");
-	MAKE_BUTTON(btn_middle, "middle");
+	auto lbl_top = std::make_shared<Label>("top");
+	auto vbox = std::make_shared<VBox>();
+	auto lbl_middle = std::make_shared<Label>("middle");
 	
 	auto hbox = std::make_shared<HBox>();
 	MAKE_BUTTON(btn_bottom, "bottom");
 	MAKE_BUTTON(btn_quit, "quit");
 	
-	ADD_CHILD(cbox, btn_top);
-	ADD_CHILD(cbox, btn_middle);
+	ADD_CHILD(cbox, lbl_top);
+	ADD_CHILD(vbox, lbl_middle);
+	ADD_CHILD(cbox, vbox);
 	ADD_CHILD(hbox, btn_bottom);
 	ADD_CHILD(hbox, btn_quit);
 	ADD_CHILD(cbox, hbox);

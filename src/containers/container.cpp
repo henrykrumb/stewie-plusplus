@@ -8,7 +8,7 @@ Container::Container(std::string address):
 		Widget(address),
 		m_focused_child(nullptr)
 {
-	m_focusable = true;
+	m_focusable = false;
 }
 
 
@@ -52,6 +52,9 @@ bool Container::add_child(std::shared_ptr<Widget> widget) {
 		m_children.push_back(widget);
 		register_node(widget);
 		pack();
+		if (widget->is_focusable()) {
+			m_focusable = true;
+		}
 		return true;
 	}
 	
@@ -73,7 +76,13 @@ bool Container::remove_child(std::shared_ptr<Widget> widget) {
 		widget->set_parent(nullptr);
 		m_children.erase(iter);
 		pack();
-		
+		m_focusable = false;
+		for (auto& child: m_children) {
+			if (child->is_focusable()) {
+				m_focusable = true;
+				break;
+			}
+		}
 		return true;
 	}
 	
@@ -163,7 +172,7 @@ void Container::set_focus(const bool& focus) {
 
 
 bool Container::focus_first() {
-	if (m_children.empty()) {
+	if (!is_focusable()) {
 		return false;
 	}
 	
@@ -184,7 +193,7 @@ bool Container::focus_first() {
 
 
 bool Container::focus_next() {
-	if (m_children.empty()) {
+	if (!is_focusable()) {
 		return false;
 	}
 	
@@ -218,7 +227,7 @@ bool Container::focus_next() {
 
 
 bool Container::focus_previous() {
-	if (m_children.empty()) {
+	if (!is_focusable()) {
 		return false;
 	}
 	
@@ -272,12 +281,3 @@ Dimension Container::get_minimum_dimensions() {
 	return Dimension(min_w, min_h);
 }
 
-
-bool Container::is_focusable() const {
-	for (auto& child: m_children) {
-		if (child->is_focusable()) {
-			return true;
-		}
-	}
-	return false;
-}

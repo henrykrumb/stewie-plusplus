@@ -51,7 +51,6 @@ public:
 	bool focus_first();
 	bool focus_next();
 	bool focus_previous();
-	bool is_focusable() const;
 	
 	virtual Dimension get_minimum_dimensions();
 

@@ -32,10 +32,10 @@ void Digit::_show(Canvas& canvas) {
 	
 	// TODO prevent buffer overflow
 	for (int row = 0; row < 5; ++row) {
-		for (int col = 0; col < 4; ++col) {
+		for (int col = 0; col < 5; ++col) {
 			int dx = x + roundi((float) (w - 2) / 2.0f) + col;
 			int dy = y + roundi((float) (h - 2) / 2.0f) + row;
-			bool invert = glyphs[m_value - '+'][row] & (1 << (3 - col));
+			bool invert = glyphs[m_value - ' '][row] & (1 << (4 - col));
 			canvas.draw_char(' ', dx, dy, invert);
 		}
 	}

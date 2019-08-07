@@ -13,6 +13,7 @@
 #include "events/event.h"
 #include "events/eventnode.h"
 
+#include "containers/banner.h"
 #include "containers/centralbox.h"
 #include "containers/container.h"
 #include "containers/frame.h"

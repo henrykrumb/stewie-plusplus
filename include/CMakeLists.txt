@@ -1,4 +1,5 @@
 list(APPEND SOURCES
+	${CMAKE_CURRENT_LIST_DIR}/containers/banner.h
 	${CMAKE_CURRENT_LIST_DIR}/containers/centralbox.h
 	${CMAKE_CURRENT_LIST_DIR}/containers/container.h
 	${CMAKE_CURRENT_LIST_DIR}/containers/frame.h
@@ -12,6 +13,7 @@ list(APPEND SOURCES
 	
 	${CMAKE_CURRENT_LIST_DIR}/widgets/button.h
 	${CMAKE_CURRENT_LIST_DIR}/widgets/checkbox.h
+	${CMAKE_CURRENT_LIST_DIR}/widgets/digit.h
 	${CMAKE_CURRENT_LIST_DIR}/widgets/label.h
 	${CMAKE_CURRENT_LIST_DIR}/widgets/numberbox.h
 	${CMAKE_CURRENT_LIST_DIR}/widgets/optionbox.h

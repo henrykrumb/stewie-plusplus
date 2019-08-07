@@ -12,6 +12,7 @@ list(APPEND SOURCES
 	
 	${CMAKE_CURRENT_LIST_DIR}/widgets/button.cpp
 	${CMAKE_CURRENT_LIST_DIR}/widgets/checkbox.cpp
+	${CMAKE_CURRENT_LIST_DIR}/widgets/digit.cpp
 	${CMAKE_CURRENT_LIST_DIR}/widgets/label.cpp
 	${CMAKE_CURRENT_LIST_DIR}/widgets/numberbox.cpp
 	${CMAKE_CURRENT_LIST_DIR}/widgets/optionbox.cpp

@@ -22,6 +22,7 @@
 
 #include "widgets/button.h"
 #include "widgets/checkbox.h"
+#include "widgets/digit.h"
 #include "widgets/label.h"
 #include "widgets/numberbox.h"
 #include "widgets/optionbox.h"

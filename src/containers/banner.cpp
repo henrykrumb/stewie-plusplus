@@ -67,16 +67,12 @@ void Banner::handle_event(const Event& ev) {
 
 
 Dimension Banner::get_minimum_dimensions() {
-	int min_w = m_min_dimensions.w(), min_h = m_min_dimensions.h();
+	int min_w = m_min_dimensions.w();
 	// accumulated minimum height
 	int acc_w = 0;
 	
 	for(auto& child: m_children) {
 		auto child_dmin = child->get_minimum_dimensions();
-		
-		if (min_h < child_dmin.h()) {
-			min_h = child_dmin.h();
-		}
 		acc_w += child_dmin.w();
 	}
 	
@@ -84,7 +80,8 @@ Dimension Banner::get_minimum_dimensions() {
 		min_w = acc_w;
 	}
 	
-	return Dimension(min_w, min_h);
+	// TODO replace hardcode
+	return Dimension(min_w, 7);
 }
 
 

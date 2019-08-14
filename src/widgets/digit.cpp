@@ -48,8 +48,8 @@ int Digit::_handle_key(const int& c) {
 
 
 void Digit::set_value(const int& value) {
-	/*if (value > 9 || value < 0) {
-		fatal("digit value must be in range [0,9]");
-	}*/
+	if (value < DIGIT_GLYPH_MIN || value > DIGIT_GLYPH_MAX) {
+		fatal("digit value out of range");
+	}
 	m_value = value;
 }
